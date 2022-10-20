@@ -1,0 +1,26 @@
+.carousel .carousel-item {
+    height: 600px;
+  }
+  
+.carousel-item img {
+      position: absolute;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+      min-height: 600px;
+}
+
+ .para {
+   color: black;
+   background: rgba(225, 225, 225, 0.5);
+ }
+
+ h5 {
+   color: black;
+ }
+ 
+ h2{
+  color: rgb(45, 106, 153);
+  margin-top: 15px;
+  margin-left: 10px;
+ }
