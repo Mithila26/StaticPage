@@ -11,6 +11,27 @@
    
 }
 
-div {
+.div {
     margin-top: 50px;
+    top: 10px;
+    
+}
+
+section {
+    margin: 60px 80px 20% 50px;
+    height: 120vh;
+    width: 100%;
+}
+.row{
+    padding-top: .5em; 
+}
+
+input[type="radio"]{
+    margin: 0 10px 0 10px;
+    font-size: 35px;
+    
+  }
+
+label{
+    font-size: 25px;
 }

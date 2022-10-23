@@ -7,6 +7,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { AboutComponent } from './Components/about/about.component';
 import { FeedbackComponent } from './Components/feedback/feedback.component';
 import { ContactComponent } from './Components/contact/contact.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { ContactComponent } from './Components/contact/contact.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,106 @@
 <section>
     <div>
-        <h1>Add your code here.....</h1>
+        <h1>Feedback Form</h1>
     </div>
+    <div class="row">
+        <div class="col-md-9 mb-md-0 mb-5">
+            <form  novalidate id="feedback-form" name="feedbackform" [formGroup]="feedbackform" (ngSubmit)="onSubmit(feedbackform.value)">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="md-form mb-0">
+                            <label for="edit-submitted-title">Title <span class="form-required" title="This field is required.">*</span></label>
+                       <select class="form-control form-select required" id="edit-submitted-title" formControlName = "title" name="submitted[title]" [ngClass]="{'is-invalid':feedbackform.get('title')?.touched && feedbackform.get('title')?.invalid}" required>
+                           <option value="" selected="selected">- Select -</option>
+                           <option value="1">Mr.</option>
+                           <option value="2">Mrs.</option>
+                           <option value="3">Miss</option>
+                       </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-10">
+                        <div class="md-form">
+                            <label for="name" class="">Enter Full Name</label>
+                           <input type="text" formControlName = "firstName" id="name" name="name" class="form-control" placeholder="Your name" [ngClass]="{'is-invalid':feedbackform.get('firstName')?.touched && feedbackform.get('firstName')?.invalid}" required >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <label for="email" class="">Enter Email</label>
+                            <input type="text" formControlName = "email" id="email" name="email" class="form-control" placeholder="Your email" [ngClass]="{'is-invalid':feedbackform.get('email')?.touched && feedbackform.get('email')?.invalid}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <label for="rates" class="" required>Do you think our health insurance rates are reasonable?</label>
+                            <div>
+                            <input type="radio" ng-model="myVar" name="test" value="Yes" >Not Sure
+                            <input type="radio" ng-model="myVar" name="test" value="No">No
+                            <input type="radio" ng-model="myVar" name="test" value="Not Sure" checked="checked">Yes                            
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <label for="rates" class="">How satisfied are you with the outcome of your claims?</label>
+                            <div>
+                            <input type="radio" ng-model="myVari" name="feedback" value="1">🙁
+                            <input type="radio" ng-model="myVari" name="feedback" value="2">😁
+                            <input type="radio" ng-model="myVari" name="feedback" value="3" checked="checked">😍                           
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <label for="rates" class="">Customer service representatives are knowledgeable and helpful</label>
+                            <div>
+                            <input type="radio" ng-model="myVaria" name="val" value="1" >No
+                            <input type="radio" ng-model="myVaria" name="val" value="2" checked="checked">Yes                          
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <label for="rates" class="">Do you plan to renew your coverage with us?</label>
+                            <div>
+                            <input type="radio" ng-model="myVariab" name="answer" value="1">No
+                            <input type="radio" ng-model="myVariab" name="answer" value="2" checked="checked">Yes                          
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form">
+                            <label for="Feedback">Do you have any other comments, questions, or concerns?</label>
+                            <textarea type="text" id="Feedback" name="Feedback" rows="3"
+                                class="form-control md-textarea" placeholder="Feedback"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary"  >Submit</button>
+                    <button type="button" class="btn btn-second" (click)="clearForm()" >Reset</button>
+                </div>             
+
+
+            </form><br>
+            </div>
+            </div>
 </section>
