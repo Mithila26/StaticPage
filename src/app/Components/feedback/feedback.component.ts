@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-
-
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.component.html',
@@ -17,17 +15,18 @@ export class FeedbackComponent implements OnInit {
     email: new FormControl('', [
       Validators.required,
       Validators.email
-    ])
-    
-   });
+    ]),
+    feedback: new FormControl()
+
+  });
   constructor() { }
-  get firstname(){
+  get firstname() {
     return this.feedbackform.get('firstName')
   }
   ngOnInit(): void {
-    
+
   }
-  onSubmit(data: any){
+  onSubmit(data: any) {
     //alert(JSON.stringify(this.feedbackform.value));
     //if(this.feedbackform.valid){
     alert("Thank You for your Feedback");

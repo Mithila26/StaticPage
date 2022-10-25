@@ -89,16 +89,15 @@
                     <div class="col-md-12">
                         <div class="md-form">
                             <label for="Feedback">Do you have any other comments, questions, or concerns?</label>
-                            <textarea type="text" id="Feedback" name="Feedback" rows="3"
+                            <textarea type="text" id="Feedback" name="Feedback" rows="3" formControlName = "feedback"
                                 class="form-control md-textarea" placeholder="Feedback"></textarea>
                         </div>
                     </div>
-                </div>
+                </div><br>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary"  >Submit</button>
                     <button type="button" class="btn btn-second" (click)="clearForm()" >Reset</button>
                 </div>             
-
 
             </form><br>
             </div>
