@@ -8,6 +8,7 @@ import { AboutComponent } from './Components/about/about.component';
 import { FeedbackComponent } from './Components/feedback/feedback.component';
 import { ContactComponent } from './Components/contact/contact.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {ReactiveFormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
