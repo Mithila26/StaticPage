@@ -15,3 +15,7 @@ section {
     transform:scale(1.01);
    
 }
+
+p, label {
+    font-size: large;
+}
