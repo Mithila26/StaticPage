@@ -35,6 +35,6 @@ export class FeedbackComponent implements OnInit {
   }
   clearForm() {
     this.feedbackform.reset(); // Resets the formgroup
-    this.answer = null;
+    //this.answer = null;
   }
 }
