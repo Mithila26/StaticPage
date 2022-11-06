@@ -1,21 +1,21 @@
 <section>
-    <div>
-        <h1>Feedback Form</h1>
-    </div>
+    
+        <h3>Feedback Form</h3>
+    
     <div class="row">
         <div class="col-md-9 mb-md-0 mb-5">
             <form  novalidate id="feedback-form" name="feedbackform" [formGroup]="feedbackform" (ngSubmit)="onSubmit(feedbackform.value)">
                 <div class="row">
                     <div class="col-md-2">
-                        <div class="md-form mb-0">
+                        
                             <label for="edit-submitted-title">Title <span class="form-required" title="This field is required.">*</span></label>
                        <select class="form-control form-select required" id="edit-submitted-title" formControlName = "title" name="submitted[title]" [ngClass]="{'is-invalid':feedbackform.get('title')?.touched && feedbackform.get('title')?.invalid}" required>
                            <option value="" selected="selected">- Select -</option>
-                           <option value="1">Mr.</option>
+                           <option value="1" >Mr.</option>
                            <option value="2">Mrs.</option>
                            <option value="3">Miss</option>
                        </select>
-                        </div>
+                        
                     </div>
 
                     <div class="col-md-10">
@@ -28,10 +28,18 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="md-form mb-0">
-                            <label for="email" class="">Enter Email</label>
-                            <input type="text" formControlName = "email" id="email" name="email" class="form-control" placeholder="Your email" [ngClass]="{'is-invalid':feedbackform.get('email')?.touched && feedbackform.get('email')?.invalid}" required>
-                        </div>
+                       
+                           <label for="email" class="">Enter email</label>
+                                    <input type="text" id="email" name="email" class="form-control" formControlName="email" placeholder="Email">
+                                    <div *ngIf="feedbackform.get('email')?.touched &&  feedbackform.get('email')?.invalid" class="alert alert-danger">
+                                        <div *ngIf="feedbackform.get('email')?.hasError('required')">
+                                            Please Enter Email
+                                        </div>
+                    
+                                        <div *ngIf="feedbackform.get('email')?.hasError('pattern')">
+                                           Please Enter Valid Email
+                                        </div>
+                                    </div>
                     </div>
                 </div>
 
@@ -40,9 +48,9 @@
                         <div class="md-form mb-0">
                             <label for="rates" class="" required>Do you think our health insurance rates are reasonable?</label>
                             <div>
-                            <input type="radio" ng-model="myVar" name="test" value="Yes" >Not Sure
-                            <input type="radio" ng-model="myVar" name="test" value="No">No
-                            <input type="radio" ng-model="myVar" name="test" value="Not Sure" checked="checked">Yes                            
+                            <input type="radio" ng-model="myVar" name="test" value="Yes"  id="radio-a">Not Sure
+                            <input type="radio" ng-model="myVar" name="test" value="No" id="radio-b">No
+                            <input type="radio" ng-model="myVar" name="test" value="Not Sure" id="radio-c">Yes                            
                         </div>
                         </div>
                     </div>
@@ -55,7 +63,7 @@
                             <div>
                             <input type="radio" ng-model="myVari" name="feedback" value="1">🙁
                             <input type="radio" ng-model="myVari" name="feedback" value="2">😁
-                            <input type="radio" ng-model="myVari" name="feedback" value="3" checked="checked">😍                           
+                            <input type="radio" ng-model="myVari" name="feedback" value="3">😍                           
                         </div>
                         </div>
                     </div>
@@ -67,7 +75,7 @@
                             <label for="rates" class="">Customer service representatives are knowledgeable and helpful</label>
                             <div>
                             <input type="radio" ng-model="myVaria" name="val" value="1" >No
-                            <input type="radio" ng-model="myVaria" name="val" value="2" checked="checked">Yes                          
+                            <input type="radio" ng-model="myVaria" name="val" value="2" >Yes                          
                         </div>
                         </div>
                     </div>
@@ -78,8 +86,8 @@
                         <div class="md-form mb-0">
                             <label for="rates" class="">Do you plan to renew your coverage with us?</label>
                             <div>
-                            <input type="radio" ng-model="myVariab" name="answer" value="1">No
-                            <input type="radio" ng-model="myVariab" name="answer" value="2" checked="checked">Yes                          
+                            <input type="radio" ng-model="myVariab" (click)="filter_source_type(0)" name="answer" value="1">No
+                            <input type="radio" ng-model="myVariab" (click)="filter_source_type(1)" name="answer" value="2">Yes                          
                         </div>
                         </div>
                     </div>
@@ -95,11 +103,13 @@
                     </div>
                 </div><br>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary"  >Submit</button>
-                    <button type="button" class="btn btn-second" (click)="clearForm()" >Reset</button>
+                    <button type="submit" class="btn btn-primary" class="btn btn-primary"   >Submit</button>
+                    <button type="button" class="btn btn-second" id="clear-button" (click)="clearForm()" >Reset</button>
                 </div>             
 
             </form><br>
             </div>
             </div>
+            
+   
 </section>
