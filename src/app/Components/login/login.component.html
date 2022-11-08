@@ -1,0 +1,50 @@
+<app-header></app-header>
+<body>
+    <div class="backdrop"></div>
+    <div class="login-form">
+        <form (ngSubmit)='loginCheck()'>
+
+            <h2>Log in</h2>
+
+            <div class="form-group" [class.has.error]="mailcontrol.touched&& mailcontrol.invalid">
+
+                <input type="text" class="form-control" #mailcontrol='ngModel' placeholder="Email"
+                    aria-describedby="inputGroupPrepend2" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                    required="required" [(ngModel)]='login.email' [ngModelOptions]="{standalone: true}">
+
+                <div *ngIf='mailcontrol.touched && mailcontrol.invalid'>
+
+                    <span class='help-block alert-danger' *ngIf='mailcontrol.touched && mailcontrol.invalid'>
+                        <div *ngIf="mailcontrol.errors?.['required']">Email is required</div>
+                        <div *ngIf="mailcontrol.errors?.['pattern']">Enter invalid mail id </div>
+                    </span>
+
+                </div>
+            </div>
+
+            <div class="form-group" [class.has.error]="passwordcontrol.touched&& passwordcontrol.invalid">
+                <input type="password" class="form-control" #passwordcontrol='ngModel' placeholder="Password"
+                    required="required" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&]).{8,}"
+                    [(ngModel)]='login.password' [ngModelOptions]="{standalone: true}">
+
+                <div *ngIf='passwordcontrol.touched && passwordcontrol.invalid'>
+
+                    <span class='help-block alert-danger' *ngIf='passwordcontrol.touched && passwordcontrol.invalid'>
+                        <div *ngIf="passwordcontrol.errors?.['required']">Password is required</div>
+                        <div *ngIf="passwordcontrol.errors?.['pattern']">Enter a valid password with atleast min length
+                            of 8 chars , one capital letter, one small letter,
+                            and one special char </div>
+                    </span>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn button-success">Log in</button>
+            </div>
+            <div class="clearfix">
+                <a routerLink="/forgotPassword" class="pull-right">Forgot Password?</a>
+            </div>
+        </form>
+
+    </div>
+</body>
