@@ -1,4 +1,88 @@
 <app-header></app-header>
-<body>
-   <h3>Create Your Claims Request here<h3>
-</body>
+
+<section>
+<div class="container">
+    <div class="row">      
+        <h4 class="text-center">Create Your Claims Request at one click! Easy and Hassle free 😃</h4>      
+    </div>
+    
+    <div class="row">     
+        <h5 >Select the Patient category</h5>
+        <div class="btn-toolbar">
+          <button type="button" id="Userbtn" class="btn btn-primary btn-sm">User</button>
+          <button type="button" id="Dependantbtn" class="btn btn-primary btn-sm" >Dependants</button>
+          </div>
+    </div> 
+    
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-11 col-xl-11">
+        <div class="card">
+          <div class="card-body">
+            
+            <mat-horizontal-stepper [linear]="isLinear" #stepper>
+              <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup" id="form_1">
+                  <ng-template matStepLabel>User Details</ng-template>
+                  
+                   <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                      <mat-form-field>
+                          <mat-label>Name</mat-label>
+                          <input matInput placeholder="name" formControlName="Name" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                      <mat-form-field>
+                        <mat-label>UserID</mat-label>
+                        <input matInput placeholder="user" formControlName="UserID" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                      <mat-form-field>
+                        <mat-label>Email Address</mat-label>
+                        <input matInput placeholder="email" formControlName="email_address" required>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                      <mat-form-field>
+                        <mat-label>Phone Number</mat-label>
+                        <input matInput placeholder="phone" formControlName="phone_number" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                      <mat-form-field>
+                        <mat-label>Email Address</mat-label>
+                        <input matInput placeholder="Name" formControlName="email_address" required>
+                      </mat-form-field>
+                    </div> </div>
+                  <br/>
+                  <div>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+                  
+      
+    
+    
+    
+   
+   
+    </mat-horizontal-stepper>
+      
+    </div>
+    </div>
+    </div>
+    </div>
+    
+     </div>
+    </section>
+<app-footer></app-footer>
+
+    
