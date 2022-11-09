@@ -7,7 +7,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { AboutComponent } from './Components/about/about.component';
 import { FeedbackComponent } from './Components/feedback/feedback.component';
 import { ContactComponent } from './Components/contact/contact.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from './Components/login/login.component';
 import { HeaderComponent } from './Components/header/header.component';
@@ -24,16 +24,16 @@ import { ClaimsComponent } from './Components/claims/claims.component';
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    ClaimsComponent
+    ClaimsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
