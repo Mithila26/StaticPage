@@ -1,43 +1,35 @@
-.backdrop {
-  background: linear-gradient(
-    115.82deg,
-    rgba(255, 255, 255, 0.2) 5.43%,
-    rgba(255, 255, 255, 0.04) 96.17%
-  );
-  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.05);
-  filter: blur(3px);
+.backimag {
+  background-color: rgb(226, 234, 236);
 }
 
-.login-form {
-  width: 340px;
-  margin: 50px auto;
+.div {
+  margin-top: 30px;
+  top: 10px;
 }
 
-form {
-  margin-bottom: 15px;
-  background: #e99b846c;
-  box-shadow: 0px 2px 2px #312c51;
-
-  padding: 30px;
+section {
+  margin: 10px 0px 0 10px;
+  height: 100vh;
+  width: 90%;
 }
 
-.login-form h2 {
-  margin: 0 0 15px;
-  color: #000000d5;
-  text-align: center;
+.row {
+  padding-top: 0.4em;
 }
 
-.form-control,
-.btn {
-  min-height: 38px;
-  border-radius: 2px;
-  font-size: 15px;
-  font-weight: bold;
+input[type="radio"] {
+  margin: 0 10px 0 10px;
+  font-size: 30px;
 }
 
-.btn {
-  width: 100px;
-  height: 40px;
-  background-color: #312c51;
-  color: azure;
+label {
+  font-size: 20px;
+}
+
+.textarea {
+  margin: 0 10px 0 10px;
+}
+
+button {
+  margin: 13px 12px 12px 10px;
 }
