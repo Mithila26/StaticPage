@@ -34,7 +34,7 @@ import { RegisterUserComponent } from './Components/register-user/register-user.
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    ClaimsComponent,,
+    ClaimsComponent,
     RegisterUserComponent
   ],
   imports: [
