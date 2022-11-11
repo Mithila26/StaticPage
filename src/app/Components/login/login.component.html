@@ -1,50 +1,43 @@
 <app-header></app-header>
+
 <body>
-    <div class="backdrop"></div>
     <div class="login-form">
-        <form (ngSubmit)='loginCheck()'>
-
+        <form #loginForm="ngForm" (ngSubmit)='loginCheck(loginForm)'>
             <h2>Log in</h2>
-
-            <div class="form-group" [class.has.error]="mailcontrol.touched&& mailcontrol.invalid">
-
-                <input type="text" class="form-control" #mailcontrol='ngModel' placeholder="Email"
-                    aria-describedby="inputGroupPrepend2" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-                    required="required" [(ngModel)]='login.email' [ngModelOptions]="{standalone: true}">
-
-                <div *ngIf='mailcontrol.touched && mailcontrol.invalid'>
-
-                    <span class='help-block alert-danger' *ngIf='mailcontrol.touched && mailcontrol.invalid'>
-                        <div *ngIf="mailcontrol.errors?.['required']">Email is required</div>
-                        <div *ngIf="mailcontrol.errors?.['pattern']">Enter invalid mail id </div>
-                    </span>
-
-                </div>
-            </div>
-
-            <div class="form-group" [class.has.error]="passwordcontrol.touched&& passwordcontrol.invalid">
-                <input type="password" class="form-control" #passwordcontrol='ngModel' placeholder="Password"
-                    required="required" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&]).{8,}"
-                    [(ngModel)]='login.password' [ngModelOptions]="{standalone: true}">
-
-                <div *ngIf='passwordcontrol.touched && passwordcontrol.invalid'>
-
-                    <span class='help-block alert-danger' *ngIf='passwordcontrol.touched && passwordcontrol.invalid'>
-                        <div *ngIf="passwordcontrol.errors?.['required']">Password is required</div>
-                        <div *ngIf="passwordcontrol.errors?.['pattern']">Enter a valid password with atleast min length
-                            of 8 chars , one capital letter, one small letter,
-                            and one special char </div>
-                    </span>
-
-                </div>
-            </div>
             <div class="form-group">
-                <button type="submit" class="btn button-success">Log in</button>
+                <input type="email" #mail="ngModel" required pattern="^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                    class="form-control" placeholder="Email" name="email" [(ngModel)]=login.email />
+                <div *ngIf="mail?.touched&&mail?.invalid" class="alert-danger">
+                    <div *ngIf="mail.errors?.['required']">
+                        Email is required
+                    </div>
+                    <div *ngIf="mail.errors?.['pattern']">
+                        Enter valid email
+                    </div>
+                </div>
             </div>
-            <div class="clearfix">
-                <a routerLink="/forgotPassword" class="pull-right">Forgot Password?</a>
+
+            <div class="form-group">
+                <input type="password" required #pass='ngModel'
+                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&]).{8,}" class="form-control"
+                    placeholder="Password" name="t4" [(ngModel)]=login.password />
+                <div *ngIf="pass?.touched&&pass?.invalid" class="alert-danger">
+                    <div *ngIf="pass.errors?.['required']">
+                        Field cannot be empty
+                    </div>
+                    <div *ngIf="pass.errors?.['pattern']">
+                        Enter a valid password with atleast min length of 8 chars , one capital letter, one small
+                        letter,
+                        and one special char
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-around">
+                <button type="submit" class="btn button-success" [disabled]="loginForm.invalid">Log in</button>
+                <div class="clearfix">
+                    <a routerLink="/forgotPassword" class="pull-right">Forgot Password?</a>
+                </div>
             </div>
         </form>
-
     </div>
 </body>

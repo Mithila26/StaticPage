@@ -12,6 +12,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from './Components/login/login.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { RegisterUserComponent } from './Components/register-user/register-user.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +25,14 @@ import { FooterComponent } from './Components/footer/footer.component';
     ContactComponent,
     LoginComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule
