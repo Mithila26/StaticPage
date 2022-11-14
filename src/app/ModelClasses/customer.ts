@@ -1,6 +1,5 @@
 export class Customer {
 
-    custId!: number;
     userName!: String;
     email!: String;
     password!: String;
@@ -11,4 +10,5 @@ export class Customer {
     isMarried!: String;
     spouseName!: String;
     spouseAge!: number;
+    dateOfBirth! : Date;
 }

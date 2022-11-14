@@ -1,112 +1,153 @@
 <app-header></app-header>
-<h3 class="text-center">User Registration </h3>
-<div class="container">
-    <div class="col-md-6 offset-md-3 text-center">
-        <form #validate="ngForm" (ngSubmit)="register(validate)">
-            <div class="form-group">
-                <input type="text" #userName="ngModel" required pattern="[a-zA-Z ]+\s[a-zA-Z]+" placeholder="Enter Full Name"
-                    name="userName" [(ngModel)]=customer.userName class="form-control" />
-                <div *ngIf="userName?.touched&&userName?.invalid" class="text-danger">
-                    <div *ngIf="userName.errors?.['required']">
-                        User name cannot be empty
-                    </div>
-                    <div *ngIf="userName.errors?.['pattern']">
-                        Only alphabets are allowed
-                    </div>
+<mat-toolbar>
+    <span>Registration</span>
+</mat-toolbar>
+<div class="col-md-4 offset-md-4">
+<mat-card class="my-card">
+    <mat-card-content>
+        <form class="my-form" name="register-form" [formGroup]="registerForm" (ngSubmit)="Submit(registerForm.value)">
+            <mat-form-field class="full-width">
+                <mat-label>Full Name</mat-label>
+                <input matInput class="form-control" formControlName="userName" placeholder="Name" name="userName" required>
+            </mat-form-field>
+            <div *ngIf="registerForm.get('userName')?.touched &&  registerForm.get('userName')?.invalid" class="alert alert-info">
+                <div *ngIf="registerForm.get('userName')?.hasError('required')">
+                    Please Enter Full Name
+                </div>
+                <div *ngIf="registerForm.get('userName')?.hasError('pattern')" >
+                   Please Enter Valid Full Name
                 </div>
             </div>
-
-            <div class="form-group">
-                <input type="email" #mail="ngModel" required pattern="^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                    class="form-control" placeholder="Enter Email" name="email" [(ngModel)]=customer.email />
-                <div *ngIf="mail?.touched&&mail?.invalid" class="text-danger">
-                    <div *ngIf="mail.errors?.['required']">
-                        Email is required
-                    </div>
-                    <div *ngIf="mail.errors?.['pattern']">
-                        Enter valid email
-                    </div>
+            <mat-form-field class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput class="form-control" formControlName="email" placeholder="Email" name="email" required>
+            </mat-form-field>
+            <div *ngIf="registerForm.get('email')?.touched &&  registerForm.get('email')?.invalid" class="alert alert-info">
+                <div *ngIf="registerForm.get('email')?.hasError('required')">
+                    Please Enter Email
+                </div>
+                <div *ngIf="registerForm.get('email')?.hasError('pattern')" >
+                   Please Enter Valid Email
                 </div>
             </div>
-
-            <div class="form-group">
-                <input type="password" required #pass='ngModel'
-                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&]).{8,}" class="form-control"
-                    placeholder="Enter password" name="password" [(ngModel)]=customer.password />
-                <div *ngIf="pass?.touched&&pass?.invalid" class="text-danger">
-                    <div *ngIf="pass.errors?.['required']">
-                        Field cannot be empty
-                    </div>
-                    <div *ngIf="pass.errors?.['pattern']">
-                        Enter a valid password with atleast min length of 8 chars , one capital letter, one small
-                        letter,
+            <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput class="form-control" type="password" formControlName="password" placeholder="Password"
+                    name="password" required>
+            </mat-form-field>
+            <div *ngIf="registerForm.get('password')?.touched &&  registerForm.get('password')?.invalid" class="alert alert-info">
+                <div *ngIf="registerForm.get('password')?.hasError('required')">
+                    Please Enter Password
+                </div>
+                <div *ngIf="registerForm.get('password')?.hasError('pattern')">
+                    Enter a valid password with atleast min length of 8 chars , one capital letter, one small letter,
                         and one special char
-                    </div>
                 </div>
             </div>
-            <div class="input-group">
-                <div class="form-group" style="margin-top:10px;">
-                    <label>Gender : </label>
-                    <label class="btn">Male
-                        <input type="radio" required #gender="ngModel" class="form-control" class="form-check-input" name="gender"
-                            [(ngModel)]=customer.gender value="Male" />
-                    </label>
-                    <label class="btn">Female
-                        <input type="radio" required #gender="ngModel" class="form-control" class="form-check-input" name="gender"
-                            [(ngModel)]=customer.gender value="Female" />
-                    </label>
-                    <div *ngIf="gender?.touched && gender?.invalid" class=" text-danger">
-                        <div *ngIf="gender.errors?.['required']">Gender is required</div>
-                    </div>
+            <mat-form-field class="half-width">
+                <mat-label>Contact</mat-label>
+                <input matInput class="form-control" formControlName="contact" placeholder="Contact" maxlength="10" 
+                    name="contact" required>
+            </mat-form-field>
+            <div *ngIf="registerForm.get('contact')?.touched &&  registerForm.get('contact')?.invalid" class="alert alert-info">
+                <div *ngIf="registerForm.get('contact')?.hasError('required')">
+                    Please Enter contact number
                 </div>
-                <div class="form-group" style="margin-left:80px;">
-                    <input type="number" required #age="ngModel" class="form-control input-sm" placeholder="Age" name="age"
-                        [(ngModel)]=customer.age />
-                    <div *ngIf="age?.touched && age?.invalid" class=" text-danger">
-                        <div *ngIf="age.errors?.['required']">Age is required</div>
-                    </div>
+                <div *ngIf="registerForm.get('contact')?.hasError('pattern')" >
+                   Please Enter Valid contact number
                 </div>
             </div>
-            <div class="from-group ">
-                <input type="text" name="contact" required #contact='ngModel' minlength="10" maxlength="10" pattern="[0-9]*"
-                    class="form-control" placeholder="Enter Contact Number" [(ngModel)]=customer.contact />
-                <div *ngIf="contact?.touched && contact?.invalid" class=" text-danger">
-                    <div *ngIf="contact.errors?.['required']">Contact number is required</div>
-                    <div *ngIf="contact.errors?.['pattern']">Only number</div>
-                    <div *ngIf="contact.errors?.['minlength']">Minimum 10 digits</div>
-                </div>
-            </div><br>
-
-            <div class="from-group ">
-                <textarea type="text" id="address" name="address" rows="2" class="form-control md-textarea" required
-                    #address="ngModel" placeholder="Address" [(ngModel)]=customer.address></textarea>
-            </div><br>
-
-            <div class="form-group">
-                <label style="float: left;">Married : </label>
-                <label class="btn" style="float: left;">Yes
-                <input type="radio" class="form-control" class="form-check-input"
-                    name="Married" [(ngModel)]="customer.isMarried" value="Yes"/>
-                </label>
-                <label class="btn"style="float: left;">No
-                <input type="radio" class="form-control" class="form-check-input"
-                    name="Married" [(ngModel)]="customer.isMarried" value="No"/>
-                </label>
-                <div *ngIf="customer.isMarried == 'Yes'" class=" text-danger">
-                    <input type="text" #userName="ngModel" required pattern="[a-zA-Z ]+\s[a-zA-Z]+" placeholder="Enter Spouse Name"
-                        name="userName" [(ngModel)]=customer.spouseName class="form-control" />
-                    <input type="number" required #spouseAge="ngModel" class="form-control" placeholder="Age" name="spouseAge"
-                        [(ngModel)]=customer.spouseAge />
-                    <div *ngIf="spouseAge?.touched && spouseAge?.invalid" class=" text-danger">
-                        <div *ngIf="spouseAge.errors?.['required']">Age is required</div>
-                    </div>
+            <mat-form-field class="half-width">
+                <mat-label>Age</mat-label>
+                <input matInput class="form-control" type="number" formControlName="age" placeholder="Age" min="1"
+                    name="age" required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Address</mat-label>
+                <input matInput class="form-control" formControlName="address" placeholder="Address" name="address"
+                    required>
+            </mat-form-field><br/>
+            <div *ngIf="registerForm.get('address')?.touched &&  registerForm.get('address')?.invalid" class="alert alert-info">
+                <div *ngIf="registerForm.get('address')?.hasError('required')">
+                    Please Enter Address
                 </div>
             </div>
-            <br>
+            <section class="example-section">
+                <label class="example-margin">Gender: * </label>
+                <mat-radio-group formControlName="gender">
+                    <mat-radio-button class="example-margin" value="Male">Male</mat-radio-button>
+                    <mat-radio-button class="example-margin" value="Female">Female</mat-radio-button>
+                    <mat-radio-button class="example-margin" value="Other">Other</mat-radio-button>
+                </mat-radio-group>
+            </section><br/>
 
-            <button style="margin-top:50px;" [disabled]="validate.invalid" type="submit" class="btn btn-success">Register</button>
+            <mat-form-field>
+                <mat-label>Date of Birth</mat-label>
+                <input matInput [matDatepicker]="picker" class="form-control" formControlName="dob"
+                    placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <section class="example-section">
+                <label class="example-margin">Married: * </label>
+                <mat-radio-group formControlName="isMarried">
+                    <mat-radio-button class="example-margin" value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button class="example-margin" value="No">No</mat-radio-button>
+                </mat-radio-group>
+                <div *ngIf="registerForm.value.isMarried == 'Yes'">
+                    <mat-form-field>
+                    <input matInput required placeholder="Spouse Name"
+                        name="spouseName" class="form-control" formControlName="spouseName"/>
+                    </mat-form-field>
+                    <div *ngIf="registerForm.get('spouseName')?.touched &&  registerForm.get('spouseName')?.invalid" class="alert alert-info">
+                        <div *ngIf="registerForm.get('spouseName')?.hasError('required')">
+                            Please enter spouse fullname
+                        </div>
+                        <div *ngIf="registerForm.get('spouseName')?.hasError('pattern')" >
+                            Please enter valid name
+                         </div>
+                    </div>
+                    <mat-form-field>
+                    <input matInput type="number" required class="form-control" placeholder="Age" name="spouseAge"
+                        formControlName="spouseAge" />
+                    </mat-form-field>
+                </div>
+            </section><br>
+            <section class="example-section">
+                <label class="example-margin">Dependents: </label>
+                <table class="table table-bordered" formArrayName="dependents">
+                    <tr>
+                        <th colspan="3">Add beneficiaries:</th>
+                        <th><button mat-mini-fab type="button" (click)="addDependents()" color="primary"><mat-icon>add</mat-icon></button></th>
+                    </tr>
+                    <tr *ngFor="let dependent of dependents().controls; let i=index" [formGroupName]="i">  
+                        <td>  
+                            Relation :  
+                            <input type="text" formControlName="relation" class="form-control">  
+                        </td>  
+                        <td>  
+                            Full Name :  
+                            <input type="text" formControlName="name" class="form-control">  
+                        </td>  
+                        <td>  
+                            Age :  
+                            <input type="number" formControlName="dependentAge" min="1" class="form-control">  
+                        </td>  
+                        <td>  
+                            <button mat-mini-fab (click)="removeDependents(i)" color="warn"><mat-icon>delete</mat-icon></button>  
+                        </td>  
+                      </tr>  
+                </table>
+            </section>
+
+            <mat-card-actions>
+                <button mat-raised-button class="btn btn-success" [disabled]="registerForm.invalid"
+                    type="submit">Register</button>
+                <button mat-raised-button class="btn btn-primary"
+                    type="reset">Reset</button>
+            </mat-card-actions>
         </form>
-    </div>
-
-
+    </mat-card-content>
+</mat-card>
 </div>

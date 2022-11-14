@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Components/home/home.component';
@@ -14,15 +13,24 @@ import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { ClaimsComponent } from './Components/claims/claims.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RegisterUserComponent } from './Components/register-user/register-user.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
+import { TokenInterceptor } from './auth/token.interceptor';
+import { LogoutComponent } from './Components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +43,8 @@ import { RegisterUserComponent } from './Components/register-user/register-user.
     HeaderComponent,
     FooterComponent,
     ClaimsComponent,
-    RegisterUserComponent
+    RegisterUserComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -50,10 +59,23 @@ import { RegisterUserComponent } from './Components/register-user/register-user.
     MatInputModule,
     MatButtonModule,
     MatListModule,
-    HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatRadioModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

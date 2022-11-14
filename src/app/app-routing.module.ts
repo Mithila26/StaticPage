@@ -7,6 +7,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/login/login.component';
 import { ClaimsComponent } from './Components/claims/claims.component';
 import { RegisterUserComponent } from './Components/register-user/register-user.component';
+import { LogoutComponent } from './Components/logout/logout.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
-  {path:'signUp', component:RegisterUserComponent},
+  { path: 'logout', component: LogoutComponent },
+  { path:'signUp', component:RegisterUserComponent},
   { path: 'claims', component: ClaimsComponent },
   { path: '**', redirectTo: '' },
 ];
