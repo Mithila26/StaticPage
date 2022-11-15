@@ -41,3 +41,7 @@ form {
   background-color: #312c51;
   color: azure;
 }
+
+.full-width {
+  width: 100%;
+}

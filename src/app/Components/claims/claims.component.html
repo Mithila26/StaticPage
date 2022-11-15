@@ -4,64 +4,172 @@
    <div>
    <h1 class="text-center">Create Your Claims Request in one click! Quick and Hassle free 😃</h1>
    </div>
+
    <div>
       <mat-horizontal-stepper [linear]="isLinear" #stepper>
          <mat-step [stepControl]="firstFormGroup">
            <form [formGroup]="firstFormGroup">
              <ng-template matStepLabel>Patient Details</ng-template>
-             <mat-form-field>
-               <mat-label>Name</mat-label>
-               <input matInput placeholder="Name" formControlName="name" required>
+             <mat-form-field class="full-width">
+              <mat-label>Claim Number</mat-label>
+              <input matInput placeholder="ClaimNum" [(ngModel)]='claimObj.ClaimNum' formControlName="ClaimNum" required>
+            </mat-form-field>
+            <br/>
+            <mat-form-field class="full-width">
+              <mat-label>Agency Number</mat-label>
+              <input matInput placeholder="AgencyNum" [(ngModel)]='claimObj.AgencyNum' formControlName="AgencyNum" required>
+            </mat-form-field>
+            <br/>
+             <mat-form-field class="full-width">
+               <mat-label>Patient Name</mat-label>
+               <input matInput placeholder="Name" [(ngModel)]='claimObj.name' formControlName="name" required>
              </mat-form-field>
              <br/>
-             <mat-form-field>
-               <mat-label>Address</mat-label>
-               <textarea matInput placeholder="Description" formControlName="description" required>
+             <mat-form-field class="full-width">
+              <mat-label>Patient ID</mat-label>
+              <input matInput placeholder="ID" [(ngModel)]='claimObj.ID' formControlName="ID" required>
+            </mat-form-field>
+            <br/>
+            <mat-form-field class="full-width">
+              <mat-label>Email ID</mat-label>
+              <input matInput placeholder="email" [(ngModel)]='claimObj.email' formControlName="email" required>
+            </mat-form-field>
+            <br/>
+             <mat-form-field class="full-width">
+               <mat-label>Contact Number</mat-label>
+               <textarea matInput placeholder="contact" [(ngModel)]='claimObj.contact' formControlName="contact" required>
                </textarea>
              </mat-form-field>
+             <div *ngIf="firstFormGroup.get('contact')?.touched &&  firstFormGroup.get('contact')?.invalid" class="alert alert-info">
+              <div *ngIf="firstFormGroup.get('contact')?.hasError('required')">
+                  Please Enter contact number
+              </div>
+              <div *ngIf="firstFormGroup.get('contact')?.hasError('pattern')" >
+                 Please Enter Valid contact number
+              </div>
+          </div>
              <div>
                <button mat-button matStepperNext>Next</button>
              </div>
            </form>
          </mat-step>
+
          <mat-step [stepControl]="secondFormGroup">
            <form [formGroup]="secondFormGroup">
-             <ng-template matStepLabel>Amount & Stock</ng-template>
-             <mat-form-field>
-               <mat-label>Amount</mat-label>
-               <input matInput placeholder="Amount" formControlName="amount" required>
-             </mat-form-field>
+             <ng-template matStepLabel>Treatment Details</ng-template>
+             <mat-form-field >
+               <mat-label>Inpatient Start Date</mat-label>
+               <input matInput [matDatepicker]="picker" [(ngModel)]='claimObj.StartDate' formControlName="StartDate" required>
+               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+               <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+             
+             <mat-form-field >
+               <mat-label>Inpatient End Date</mat-label>
+               <input matInput [matDatepicker]="picker1" [(ngModel)]='claimObj.EndDate' formControlName="EndDate" required>
+               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+               <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
              <br/>
-             <mat-form-field>
-               <mat-label>Stock</mat-label>
-               <input matInput placeholder="Stock" formControlName="stock" required>
-             </mat-form-field>
-             <br/>
+             <mat-form-field class="full-width">
+              <mat-label>Enter treatment details</mat-label>
+              <input matInput placeholder="Treatment" [(ngModel)]='claimObj.Treatment' formControlName="Treatment" required>
+            </mat-form-field>
+            <br/>
+            <mat-form-field class="full-width">
+              <mat-label>Enter Policy Duration</mat-label>
+              <input matInput placeholder="PolDur" [(ngModel)]='claimObj.PolDur' formControlName="PolDur" required>
+            </mat-form-field>
+            <br/>
+            <mat-form-field class="full-width">
+              <mat-label>Enter Policy Amount</mat-label>
+              <input matInput placeholder="PolAmt" [(ngModel)]='claimObj.PolAmt' formControlName="PolAmt" required>
+            </mat-form-field>
+            <br/>
+            
              <div>
                <button mat-button matStepperPrevious>Back</button>
                <button mat-button matStepperNext>Next</button>
              </div>
            </form>
          </mat-step>
+
+         <mat-step [stepControl]="thirdFormGroup">
+          <form [formGroup]="thirdFormGroup">
+            <ng-template matStepLabel>Premium Details</ng-template>
+            <mat-form-field class="full-width">
+              <mat-label>Enter Claim Amount</mat-label>
+              <input matInput placeholder="ClaimAmt" [(ngModel)]='claimObj.ClaimAmt' formControlName="ClaimAmt" required>
+            </mat-form-field>
+            <br/>
+            <mat-form-field class="full-width">
+              <mat-label>Total Coverage amount</mat-label>
+              <input matInput placeholder="Coverage" [(ngModel)]='claimObj.Coverage' formControlName="Coverage" required>
+            </mat-form-field>
+            <br/>
+            <mat-form-field class="full-width">
+             <mat-label>Enter Premium amount</mat-label>
+             <input matInput placeholder="Premium" [(ngModel)]='claimObj.Premium' formControlName="Premium" required>
+           </mat-form-field>
+           <br/>
+           <mat-form-field class="full-width">
+             <mat-label>Enter Due Amount</mat-label>
+             <input matInput placeholder="DueAmt" [(ngModel)]='claimObj.DueAmt' formControlName="DueAmt" required>
+           </mat-form-field>
+           <br/>
+           <mat-form-field class="full-width">
+             <mat-label>Enter Balance</mat-label>
+             <input matInput placeholder="Balance" [(ngModel)]='claimObj.Balance' formControlName="Balance" required>
+           </mat-form-field>
+           <br/>
+            <mat-form-field >
+            <mat-label>Statement Date</mat-label>
+            <input matInput [matDatepicker]="picker2" [(ngModel)]='claimObj.StatDate' formControlName="StatDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+           </mat-form-field>
+           <mat-form-field >
+            <mat-label>Due Date</mat-label>
+            <input matInput [matDatepicker]="picker3" [(ngModel)]='claimObj.DueDate' formControlName="DueDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+           </mat-form-field>
+           <br/>
+           <mat-form-field class="full-width">
+             <mat-label>Payment in Total</mat-label>
+             <input matInput placeholder="Payment" [(ngModel)]='claimObj.Payment' formControlName="Payment" required>
+           </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
          <mat-step>
            <ng-template matStepLabel>Done</ng-template>
            <p>You are now done.</p>
          
            <mat-list>
-           <mat-list-item> <strong>Name:</strong> {{ this.firstFormGroup.value.name }}</mat-list-item>
-           <mat-list-item> <strong>Description:</strong> {{ this.firstFormGroup.value.description }}</mat-list-item>
-           <mat-list-item> <strong>Amount:</strong> {{ this.secondFormGroup.value.amount }}</mat-list-item>
-           <mat-list-item> <strong>Stock:</strong> {{ this.secondFormGroup.value.stock }}</mat-list-item>
+           <mat-list-item> <strong>Name :</strong> {{ this.firstFormGroup.value.name }}</mat-list-item>
+           <mat-list-item> <strong>Contact :</strong> {{ this.firstFormGroup.value.contact }}</mat-list-item>
+           <mat-list-item> <strong>Email ID :</strong> {{ this.firstFormGroup.value.email }}</mat-list-item>
+           <mat-list-item> <strong>Policy Amount :</strong> {{ this.secondFormGroup.value.PolAmt }}</mat-list-item>
+           <mat-list-item> <strong>Policy Duration :</strong> {{ this.secondFormGroup.value.PolDur }}</mat-list-item>
+           <mat-list-item> <strong>Claim Amount :</strong> {{ this.thirdFormGroup.value.ClaimAmt }}</mat-list-item>
+           <mat-list-item> <strong>Total Coverage :</strong> {{ this.thirdFormGroup.value.Coverage }}</mat-list-item>
+           <mat-list-item> <strong>Payment in Total :</strong> {{ this.thirdFormGroup.value.Payment }}</mat-list-item>
           </mat-list>
          
            <div>
              <button mat-button matStepperPrevious>Back</button>
              <button mat-button (click)="stepper.reset()">Reset</button>
-             <button mat-button (click)="submit()">Submit</button>
+             <button mat-button (click)="submit()" routerLink="/registerClaim" >Submit</button>
            </div>
          </mat-step>
-       </mat-horizontal-stepper>
+       </mat-horizontal-stepper>       
    </div>
+  
 
 
 
@@ -75,5 +183,4 @@
 
 </body>
 <app-footer></app-footer>
-
 

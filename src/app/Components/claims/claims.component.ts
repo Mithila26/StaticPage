@@ -8,6 +8,9 @@ import {
   
 } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { ApiService } from 'src/app/Services/api.services';
+import { Router } from '@angular/router';
+import { CustomerService } from 'src/app/Services/customer.service';
 
 @Component({
   selector: 'app-claims',
@@ -19,15 +22,46 @@ export class ClaimsComponent implements OnInit {
   //firstFormGroup: FormGroup;
   //secondFormGroup: FormGroup;
 
+  public claimObj={ClaimNum:'',AgencyNum :'', ID:'',
+  name: '',contact: '',StartDate:'', EndDate:'', Treatment:'',PolDur:'',
+  PolAmt:'', Eligible:'',ClaimAmt:'',Coverage:'',Premium:'', StatDate:'',
+  DueAmt:'',Balance:'',DueDate:'',Payment:'', email:''};
+
+  login = { email: '', password: '' };
+
+
   firstFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
-    description: ['', Validators.required]
+    ClaimNum: ['', Validators.required],
+    AgencyNum: ['', Validators.required],
+    ID: ['', Validators.required],
+    contact: ['', [Validators.required,Validators.pattern('[0-9]*')]],
+    email: ['', [Validators.required]]
   });
   secondFormGroup = this._formBuilder.group({
-    amount: ['', Validators.required],
-    stock: ['', Validators.required]
+    StartDate: ['', Validators.required],
+    EndDate: ['', Validators.required],
+    Treatment: ['', Validators.required],
+    PolDur: ['', Validators.required],
+    PolAmt: ['', Validators.required],
+    //Eligible: ['', Validators.required]
+    
+    
   });
-  constructor(private _formBuilder: FormBuilder) {}
+
+  thirdFormGroup = this._formBuilder.group({
+    
+    ClaimAmt: ['', Validators.required],
+    Coverage: ['', Validators.required],
+    Premium: ['', Validators.required],
+    StatDate: ['', Validators.required],
+    DueAmt: ['', Validators.required],
+    Balance: ['', Validators.required],
+    DueDate: ['', Validators.required],    
+    Payment: ['', Validators.required]
+
+  });
+  constructor(private router: Router, private _formBuilder: FormBuilder, private api: ApiService,private customerService: CustomerService ) {}
 
   
 
@@ -43,7 +77,17 @@ export class ClaimsComponent implements OnInit {
   }
 
   submit(){
+    
     console.log(this.firstFormGroup.value);
     console.log(this.secondFormGroup.value);
+    var formData: any = new FormData();
+    formData.append(this.firstFormGroup.value,this.secondFormGroup.value);
+    console.log(formData);console.log(this.claimObj);
+    this.api.registerClaim(this.claimObj);
+
 }
+  
+
+  
+
 }

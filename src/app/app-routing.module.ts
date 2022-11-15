@@ -8,6 +8,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { ClaimsComponent } from './Components/claims/claims.component';
 import { RegisterUserComponent } from './Components/register-user/register-user.component';
 import { LogoutComponent } from './Components/logout/logout.component';
+import { ApiService } from 'src/app/Services/api.services';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,12 +19,13 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path:'signUp', component:RegisterUserComponent},
-  { path: 'claims', component: ClaimsComponent },
+  { path: 'claims', component: ClaimsComponent, canActivate: [ApiService] },
   { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [ ApiService ]
 })
 export class AppRoutingModule {}
