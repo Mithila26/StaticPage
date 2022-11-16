@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/Services/api.services';
 import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/Services/customer.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-claims',
@@ -18,9 +19,7 @@ import { CustomerService } from 'src/app/Services/customer.service';
   styleUrls: ['./claims.component.css'],
 })
 export class ClaimsComponent implements OnInit {
-  isLinear = true;
-  //firstFormGroup: FormGroup;
-  //secondFormGroup: FormGroup;
+  isLinear = true;  
 
   public claimObj={ClaimNum:'',AgencyNum :'', ID:'',
   name: '',contact: '',StartDate:'', EndDate:'', Treatment:'',PolDur:'',
@@ -28,8 +27,7 @@ export class ClaimsComponent implements OnInit {
   DueAmt:'',Balance:'',DueDate:'',Payment:'', email:''};
 
   login = { email: '', password: '' };
-
-
+  
   firstFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
     ClaimNum: ['', Validators.required],
@@ -44,7 +42,7 @@ export class ClaimsComponent implements OnInit {
     Treatment: ['', Validators.required],
     PolDur: ['', Validators.required],
     PolAmt: ['', Validators.required],
-    //Eligible: ['', Validators.required]
+    Eligible: ['', Validators.required]
     
     
   });
@@ -66,25 +64,34 @@ export class ClaimsComponent implements OnInit {
   
 
   ngOnInit(): void {
-    /*this.firstFormGroup = this._formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      amount: ['', Validators.required],
-      stock: ['', Validators.required]
-    });*/
+    
   }
 
-  submit(){
-    
-    console.log(this.firstFormGroup.value);
-    console.log(this.secondFormGroup.value);
-    var formData: any = new FormData();
-    formData.append(this.firstFormGroup.value,this.secondFormGroup.value);
-    console.log(formData);console.log(this.claimObj);
-    this.api.registerClaim(this.claimObj);
+  
 
+submit(validate: any) {
+  console.log("claim obj",this.claimObj);
+  this.api.registerClaim(this.claimObj).subscribe(response => {
+    console.log('submit',response);
+    Swal.fire({
+      text: 'Your claim request has been created. Have a good Day!'
+  })
+     this.router.navigate(['home']);
+  }, err =>{
+     if(err.error.success == false){
+      Swal.fire({
+        icon:'error',
+        title: JSON.stringify(err.error.message),
+        text: 'Please try Again'
+    })
+    }else{
+      Swal.fire({
+        icon:'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+    })
+    }  
+  })
 }
   
 
