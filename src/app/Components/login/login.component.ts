@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   login = { email: '', password: '' };
   // token: string ='';
+  
 
   constructor(private router: Router, private customerService: CustomerService) { }
 
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
         // this.token = JSON.stringify(response.data.token);
         // this.token = this.token.replace(/"/g,'');
         localStorage.setItem('token', response.data.token);
+        //console.log(response.data.token);
         if(response.data.role == 'user'){
           this.router.navigate(['contact']); //redirect to user component
         } else if (response.data.role == 'admin'){
