@@ -6,18 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CustomerService {
-  public isLoggedIn: boolean = false;
-  constructor(private http:HttpClient) { }
+
+  constructor(private http: HttpClient) { }
 
   login(login: any): Observable<any> {
     let url = "http://localhost:3000/user/login";
-    return this.http.post(url, login); 
-    
+    return this.http.post(url, login);
   }
 
   signUp(login: any): Observable<any> {
     let url = "http://localhost:3000/user/signUp";
-    return this.http.post(url, login); 
+    return this.http.post(url, login);
   }
 
 }

@@ -5,12 +5,9 @@ import {
   FormControl,
   FormArray,
   Validators
-  
 } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/Services/api.services';
 import { Router } from '@angular/router';
-import { CustomerService } from 'src/app/Services/customer.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,21 +16,23 @@ import Swal from 'sweetalert2';
   styleUrls: ['./claims.component.css'],
 })
 export class ClaimsComponent implements OnInit {
-  isLinear = true;  
+  isLinear = true;
 
-  public claimObj={ClaimNum:'',AgencyNum :'', ID:'',
-  name: '',contact: '',StartDate:'', EndDate:'', Treatment:'',PolDur:'',
-  PolAmt:'', Eligible:'',ClaimAmt:'',Coverage:'',Premium:'', StatDate:'',
-  DueAmt:'',Balance:'',DueDate:'',Payment:'', email:''};
+  public claimObj = {
+    ClaimNum: '', AgencyNum: '', ID: '',
+    name: '', contact: '', StartDate: '', EndDate: '', Treatment: '', PolDur: '',
+    PolAmt: '', Eligible: '', ClaimAmt: '', Coverage: '', Premium: '', StatDate: '',
+    DueAmt: '', Balance: '', DueDate: '', Payment: '', email: ''
+  };
 
   login = { email: '', password: '' };
-  
+
   firstFormGroup = this._formBuilder.group({
     name: ['', Validators.required],
     ClaimNum: ['', Validators.required],
     AgencyNum: ['', Validators.required],
     ID: ['', Validators.required],
-    contact: ['', [Validators.required,Validators.pattern('[0-9]*')]],
+    contact: ['', [Validators.required, Validators.pattern('[0-9]*')]],
     email: ['', [Validators.required]]
   });
   secondFormGroup = this._formBuilder.group({
@@ -43,58 +42,55 @@ export class ClaimsComponent implements OnInit {
     PolDur: ['', Validators.required],
     PolAmt: ['', Validators.required],
     Eligible: ['', Validators.required]
-    
-    
+
+
   });
 
   thirdFormGroup = this._formBuilder.group({
-    
+
     ClaimAmt: ['', Validators.required],
     Coverage: ['', Validators.required],
     Premium: ['', Validators.required],
     StatDate: ['', Validators.required],
     DueAmt: ['', Validators.required],
     Balance: ['', Validators.required],
-    DueDate: ['', Validators.required],    
+    DueDate: ['', Validators.required],
     Payment: ['', Validators.required]
 
   });
-  constructor(private router: Router, private _formBuilder: FormBuilder, private api: ApiService,private customerService: CustomerService ) {}
+  constructor(private router: Router, private _formBuilder: FormBuilder, private api: ApiService) { }
 
-  
+
 
   ngOnInit(): void {
-    
   }
 
-  
+  submit(validate: any) {
 
-submit(validate: any) {
-  console.log("claim obj",this.claimObj);
-  this.api.registerClaim(this.claimObj).subscribe(response => {
-    console.log('submit',response);
-    Swal.fire({
-      text: 'Your claim request has been created. Have a good Day!'
-  })
-     this.router.navigate(['home']);
-  }, err =>{
-     if(err.error.success == false){
-      Swal.fire({
-        icon:'error',
-        title: JSON.stringify(err.error.message),
-        text: 'Please try Again'
-    })
-    }else{
-      Swal.fire({
-        icon:'error',
-        title: 'Oops...',
-        text: 'Something went wrong!'
-    })
-    }  
-  })
-}
-  
+    this.api.registerClaim(this.claimObj).subscribe(response => {
 
-  
+      Swal.fire({
+        text: 'Your claim request has been created. Have a good Day!'
+      })
+
+      if (response.success == true) {
+        this.router.navigate(['home']);
+      }
+    }, err => {
+      if (err.error.success == false) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Session Expired',
+          text: 'Please LogIn Again'
+        })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!'
+        })
+      }
+    })
+  }
 
 }

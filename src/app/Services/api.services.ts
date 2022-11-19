@@ -20,12 +20,9 @@ constructor(private http: HttpClient,  private router: Router) { }
     });
   }
 
-  registerClaim(claimObj: any){
-    this.http.post('http://localhost:3000/registerClaim',claimObj ).subscribe(res =>{
-        console.log(res);
-        this.message=res;
-        return this.http.post('http://localhost:3000/registerClaim', claimObj); 
-    });
+  registerClaim(claimObj: any): Observable<any>{
+    let url = "http://localhost:3000/claims/registerClaim";
+    return this.http.post(url, claimObj); 
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -37,8 +34,5 @@ constructor(private http: HttpClient,  private router: Router) { }
       return false;
     }
   }
-
-
-
 
 }
