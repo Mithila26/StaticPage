@@ -31,6 +31,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { LogoutComponent } from './Components/logout/logout.component';
+import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
+import { MatDialogModule} from '@angular/material/dialog'
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { LogoutComponent } from './Components/logout/logout.component';
     FooterComponent,
     ClaimsComponent,
     RegisterUserComponent,
-    LogoutComponent
+    LogoutComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { LogoutComponent } from './Components/logout/logout.component';
     MatToolbarModule,
     MatCardModule,
     MatFormFieldModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDialogModule
   ],
   providers: [
     {

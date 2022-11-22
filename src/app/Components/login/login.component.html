@@ -33,9 +33,9 @@
                 </div>
             </div>
             <div class="d-flex justify-content-around">
-                <button type="submit" class="btn button-success" [disabled]="loginForm.invalid">Log in</button>
+                <button type="submit" class="btn button-success" [disabled]="loginForm.invalid">Log in <mat-icon>login</mat-icon></button>
                 <div class="clearfix">
-                    <a routerLink="/forgotPassword" class="pull-right">Forgot Password?</a>
+                    <a (click)="forgotPassword()" class="pull-right">Forgot Password?</a>
                 </div>
             </div>
         </form>

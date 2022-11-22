@@ -9,6 +9,7 @@ import { ClaimsComponent } from './Components/claims/claims.component';
 import { RegisterUserComponent } from './Components/register-user/register-user.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { ApiService } from 'src/app/Services/api.services';
+import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path:'signUp', component:RegisterUserComponent},
   { path: 'claims', component: ClaimsComponent, canActivate: [ApiService] },
+  { path: 'forgotPassword', component: ForgotPasswordComponent},
   { path: '**', redirectTo: '' },
 ];
 

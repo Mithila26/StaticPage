@@ -109,7 +109,7 @@
                          </div>
                     </div>
                     <mat-form-field>
-                    <input matInput type="number" required class="form-control" placeholder="Age" name="spouseAge"
+                    <input matInput type="number" required class="form-control" placeholder="Age" name="spouseAge" min="18"
                         formControlName="spouseAge" />
                     </mat-form-field>
                 </div>
@@ -119,7 +119,7 @@
                 <table class="table table-bordered" formArrayName="dependents">
                     <tr>
                         <th colspan="3">Add beneficiaries:</th>
-                        <th><button mat-mini-fab type="button" (click)="addDependents()" color="primary"><mat-icon>add</mat-icon></button></th>
+                        <th><button mat-mini-fab type="button" (click)="addDependents()" color="primary"><mat-icon>person_add</mat-icon></button></th>
                     </tr>
                     <tr *ngFor="let dependent of dependents().controls; let i=index" [formGroupName]="i">  
                         <td>  
@@ -143,9 +143,9 @@
 
             <mat-card-actions>
                 <button mat-raised-button class="btn btn-success" [disabled]="registerForm.invalid"
-                    type="submit">Register</button>
+                    type="submit">Register <mat-icon>contact_mail</mat-icon></button>
                 <button mat-raised-button class="btn btn-primary"
-                    type="reset">Reset</button>
+                    type="reset">Reset <mat-icon>clear</mat-icon></button>
             </mat-card-actions>
         </form>
     </mat-card-content>

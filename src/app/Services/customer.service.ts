@@ -14,9 +14,14 @@ export class CustomerService {
     return this.http.post(url, login);
   }
 
-  signUp(login: any): Observable<any> {
+  signUp(details: any): Observable<any> {
     let url = "http://localhost:3000/user/signUp";
-    return this.http.post(url, login);
+    return this.http.post(url, details);
+  }
+
+  resetPassword(details: any): Observable<any> {
+    let url = "http://localhost:3000/user/resetPassword";
+    return this.http.patch(url, details);
   }
 
 }
