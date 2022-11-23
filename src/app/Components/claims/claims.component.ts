@@ -80,7 +80,8 @@ export class ClaimsComponent implements OnInit {
       Balance:this.thirdFormGroup.value.Balance,
       DueDate:this.thirdFormGroup.value.DueDate,
       Payment:this.thirdFormGroup.value.Payment, 
-      email:this.firstFormGroup.value.email
+      email:this.firstFormGroup.value.email,
+      claimStatus:"Requested"
     };    
      this.api.registerClaim(this.claimObj).subscribe(response => {      
 
