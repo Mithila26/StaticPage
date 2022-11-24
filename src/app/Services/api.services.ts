@@ -35,4 +35,10 @@ constructor(private http: HttpClient,  private router: Router) { }
     }
   }
 
+  
+  baseUri : string = "http://localhost:3000/admin/details";
+  getDetails() {
+    return this.http.get(`${this.baseUri}`);
+  }
+
 }
