@@ -32,12 +32,12 @@ export class ClaimsComponent implements OnInit {
   ngOnInit() {
     
     this.firstFormGroup= this._formBuilder.group({
-      name: ['',[Validators.required, Validators.pattern('[a-zA-Z ]+[a-zA-Z]+')]],
+      Patientname: ['',[Validators.required, Validators.pattern('[a-zA-Z ]+[a-zA-Z]+')]],
       ClaimNum: ['', [Validators.required, Validators.pattern('[0-9]*')]],
       AgencyNum: ['', [Validators.required, Validators.pattern('[0-9]*')]],
-      ID: ['', [Validators.required]],
-      contact: ['', [Validators.required, Validators.pattern('[0-9]*')]],
-      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
+      PatientID: ['', [Validators.required]],
+      Patientcontact: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+      Patientemail: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
     });
 
     this.secondFormGroup = this._formBuilder.group({
@@ -63,9 +63,9 @@ export class ClaimsComponent implements OnInit {
   submit() {
       this.claimObj={ClaimNum:this.firstFormGroup.value.ClaimNum,
       AgencyNum :this.firstFormGroup.value.AgencyNum, 
-      ID:this.firstFormGroup.value.ID,
-      name: this.firstFormGroup.value.name,
-      contact: this.firstFormGroup.value.contact,
+      PatientID:this.firstFormGroup.value.PatientID,
+      Patientname: this.firstFormGroup.value.Patientname,
+      Patientcontact: this.firstFormGroup.value.Patientcontact,
       StartDate:this.secondFormGroup.value.StartDate, 
       EndDate:this.secondFormGroup.value.EndDate, 
       Treatment:this.secondFormGroup.value.Treatment,
@@ -80,7 +80,7 @@ export class ClaimsComponent implements OnInit {
       Balance:this.thirdFormGroup.value.Balance,
       DueDate:this.thirdFormGroup.value.DueDate,
       Payment:this.thirdFormGroup.value.Payment, 
-      email:this.firstFormGroup.value.email,
+      Patientemail:this.firstFormGroup.value.Patientemail,
       claimStatus:"Requested"
     };    
      this.api.registerClaim(this.claimObj).subscribe(response => {      
