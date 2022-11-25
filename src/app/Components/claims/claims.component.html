@@ -43,42 +43,42 @@
               <br />
               <mat-form-field class="full-width">
                 <mat-label>Patient Name</mat-label>
-                <input matInput placeholder="Name" formControlName="name" required>
+                <input matInput placeholder="Patientname" formControlName="Patientname" required>
               </mat-form-field>
-              <div *ngIf="firstFormGroup.get('name')?.touched &&  firstFormGroup.get('name')?.invalid"
+              <div *ngIf="firstFormGroup.get('Patientname')?.touched &&  firstFormGroup.get('Patientname')?.invalid"
                 class="alert alert-info">
-                <div *ngIf="firstFormGroup.get('name')?.hasError('required')">
+                <div *ngIf="firstFormGroup.get('Patientname')?.hasError('required')">
                   Please Enter Full Name
                 </div>
-                <div *ngIf="firstFormGroup.get('name')?.hasError('pattern')">
+                <div *ngIf="firstFormGroup.get('Patientname')?.hasError('pattern')">
                   Please Enter Valid Full Name
                 </div>
               </div>
               <br />
               <mat-form-field class="full-width">
                 <mat-label>Patient ID</mat-label>
-                <input matInput placeholder="ID" formControlName="ID" required>
+                <input matInput placeholder="PatientID" formControlName="PatientID" required>
               </mat-form-field>
-              <div *ngIf="firstFormGroup.get('ID')?.touched &&  firstFormGroup.get('ID')?.invalid"
+              <div *ngIf="firstFormGroup.get('PatientID')?.touched &&  firstFormGroup.get('PatientID')?.invalid"
                 class="alert alert-info">
-                <div *ngIf="firstFormGroup.get('ID')?.hasError('required')">
+                <div *ngIf="firstFormGroup.get('PatientID')?.hasError('required')">
                   Please Enter Patient ID
                 </div>
-                <div *ngIf="firstFormGroup.get('ID')?.hasError('pattern')">
+                <div *ngIf="firstFormGroup.get('PatientID')?.hasError('pattern')">
                   Please Enter Valid Patient ID
                 </div>
               </div>
               <br />
               <mat-form-field class="full-width">
                 <mat-label>Email ID</mat-label>
-                <input matInput placeholder="email" formControlName="email" required>
+                <input matInput placeholder="Patientemail" formControlName="Patientemail" required>
               </mat-form-field>
-              <div *ngIf="firstFormGroup.get('email')?.touched &&  firstFormGroup.get('email')?.invalid"
+              <div *ngIf="firstFormGroup.get('Patientemail')?.touched &&  firstFormGroup.get('Patientemail')?.invalid"
                 class="alert alert-info">
-                <div *ngIf="firstFormGroup.get('email')?.hasError('required')">
+                <div *ngIf="firstFormGroup.get('Patientemail')?.hasError('required')">
                   Please Enter Email ID
                 </div>
-                <div *ngIf="firstFormGroup.get('email')?.hasError('pattern')">
+                <div *ngIf="firstFormGroup.get('Patientemail')?.hasError('pattern')">
                   Please Enter Valid Email ID
                 </div>
               </div>
@@ -86,15 +86,15 @@
 
               <mat-form-field class="full-width">
                 <mat-label>Contact Number</mat-label>
-                <textarea matInput placeholder="contact" formControlName="contact" maxlength="10" required>
+                <textarea matInput placeholder="Patientcontact" formControlName="Patientcontact" maxlength="10" required>
                </textarea>
               </mat-form-field>
-              <div *ngIf="firstFormGroup.get('contact')?.touched &&  firstFormGroup.get('contact')?.invalid"
+              <div *ngIf="firstFormGroup.get('Patientcontact')?.touched &&  firstFormGroup.get('Patientcontact')?.invalid"
                 class="alert alert-info">
-                <div *ngIf="firstFormGroup.get('contact')?.hasError('required')">
+                <div *ngIf="firstFormGroup.get('Patientcontact')?.hasError('required')">
                   Please Enter contact number
                 </div>
-                <div *ngIf="firstFormGroup.get('contact')?.hasError('pattern')">
+                <div *ngIf="firstFormGroup.get('Patientcontact')?.hasError('pattern')">
                   Please Enter Valid contact number
                 </div>
               </div>
