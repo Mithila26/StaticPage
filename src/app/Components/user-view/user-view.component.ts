@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { admins } from 'src/app/Services/Admins';
 import { ApiService } from 'src/app/Services/api.services';
-import { PopUp1Component } from '../PopUp1/pop-up1.component';
+import { PopUpComponent } from '../pop-up/pop-up.component';
 
 
 @Component({
@@ -47,7 +47,7 @@ export class UserViewComponent  {
  
  
   openDialog(){
-   this.Dialogref.open(PopUp1Component)
+   this.Dialogref.open(PopUpComponent);
   }
 
   

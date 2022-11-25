@@ -33,6 +33,13 @@ import { TokenInterceptor } from './auth/token.interceptor';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
 import { MatDialogModule} from '@angular/material/dialog'
+import { UserViewComponent } from './Components/user-view/user-view.component';
+import { AdminViewComponent } from './Components/admin-view/admin-view.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PopUpComponent } from './Components/pop-up/pop-up.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +54,10 @@ import { MatDialogModule} from '@angular/material/dialog'
     ClaimsComponent,
     RegisterUserComponent,
     LogoutComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    UserViewComponent,
+    AdminViewComponent,
+    PopUpComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +81,11 @@ import { MatDialogModule} from '@angular/material/dialog'
     MatCardModule,
     MatFormFieldModule,
     MatRadioModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ],
   providers: [
     {

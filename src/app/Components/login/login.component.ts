@@ -38,9 +38,9 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', response.data.token);
 
         if (response.data.role == 'user') {
-          this.router.navigate(['contact']); //redirect to user component
+          this.router.navigate(['user']); //redirect to user component
         } else if (response.data.role == 'admin') {
-          this.router.navigate(['feedback']); //redirect to admin component
+          this.router.navigate(['admin']); //redirect to admin component
         } else {
           this.router.navigate(['home']);
         }

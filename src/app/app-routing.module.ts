@@ -10,6 +10,8 @@ import { RegisterUserComponent } from './Components/register-user/register-user.
 import { LogoutComponent } from './Components/logout/logout.component';
 import { ApiService } from 'src/app/Services/api.services';
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
+import { UserViewComponent } from './Components/user-view/user-view.component';
+import { AdminViewComponent } from './Components/admin-view/admin-view.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,15 +21,17 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
-  { path:'signUp', component:RegisterUserComponent},
+  { path: 'signUp', component: RegisterUserComponent },
   { path: 'claims', component: ClaimsComponent, canActivate: [ApiService] },
-  { path: 'forgotPassword', component: ForgotPasswordComponent},
+  { path: 'forgotPassword', component: ForgotPasswordComponent },
+  { path: 'user', component: UserViewComponent },
+  { path: 'admin', component: AdminViewComponent },
   { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [ ApiService ]
+  providers: [ApiService]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

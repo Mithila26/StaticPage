@@ -34,7 +34,7 @@ export class PopUpComponent {
   }
 
   /*########### Template Driven Form ###########*/
-  onSubmit() {
+  onSubmit():any {
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       return false;
