@@ -1,33 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-
-
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/Services/api.services';
-import { admins } from 'src/app/Services/Admins';
 import { PopUpComponent } from '../pop-up/pop-up.component';
+import { ClaimsComponent } from '../claims/claims.component';
 
 @Component({
   selector: 'app-admin-view',
   templateUrl: './admin-view.component.html',
   styleUrls: ['./admin-view.component.css']
 })
-export class AdminViewComponent  {
+export class AdminViewComponent {
 
-  admins :any = [];
-  // columns we will show on the table
-  public displayedColumns = ['ClaimId', 'ClaimName', 'SubmissionDate', 'Status','action' ];
-  //the source where we will get the data
- dataSource = new MatTableDataSource<admins>();
-  router: any;
+  public displayedColumns = ['ClaimId', 'ClaimName', 'SubmissionDate', 'Status', 'action'];
 
-  AdminDetails:any = [];
+  dataSource: any;
+
+  AdminDetails: any = [];
+  source: any = [];
 
   //dependency injection
-  constructor( private adminAPIservice: ApiService , private Dialogref : MatDialog) {
+  constructor(private adminAPIservice: ApiService, private Dialogref: MatDialog) {
   }
   public isEditable = false;
-  ngOnInit(){
+  ngOnInit() {
     //call this method on component load
     this.readDetails();
 
@@ -36,28 +32,22 @@ export class AdminViewComponent  {
    * This method returns students details
    */
 
-  readDetails(){
+  readDetails() {
     this.adminAPIservice.getDetails().subscribe((data) => {
-     this.AdminDetails = data;
-     this.dataSource = new MatTableDataSource<admins>(this.AdminDetails);
-    })    
+
+      this.AdminDetails = data;
+      this.dataSource = new MatTableDataSource(this.AdminDetails);
+      this.AdminDetails.forEach((claim: any) => {
+        claim.claimsDetails.forEach( (i: any) => {
+          this.source.push(i);
+        })
+      })
+      console.log(this.source);
+    })
   }
 
-  
- 
- 
-  openDialog(){
-   this.Dialogref.open(PopUpComponent)
+  openDialog() {
+    this.Dialogref.open(PopUpComponent)
   }
 
-  
- 
-
-
- 
-
- 
-
-
- 
 }

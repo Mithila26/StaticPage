@@ -18,23 +18,64 @@
   <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 
 <table mat-table [dataSource]="dataSource">
+
+  <!-- <ng-container *ngFor="let col of source">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ col }} </th>
+    <td mat-cell *matCellDef="let element"> {{ element[col] }} </td>
+</ng-container> -->
+
+  <!-- <ng-container matColumnDef="ClaimId">
+    <th mat-header-cell *matHeaderCellDef> claimId</th>
+    <td mat-cell *matCellDef="let employee "> {{employee}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="ClaimName">
+    <th mat-header-cell *matHeaderCellDef> Claim Name </th>
+    <td mat-cell *matCellDef="let employee "> {{employee.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="SubmissionDate">
+    <th mat-header-cell *matHeaderCellDef> Submission Date </th>
+    <td mat-cell *matCellDef="let employee"> {{employee.EndDate}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Status">
+    <th mat-header-cell *matHeaderCellDef> status </th>
+    <td mat-cell *matCellDef="let employee "> {{employee.PolDur}} </td>
+  </ng-container> -->
+  
     <ng-container matColumnDef="ClaimId">
       <th mat-header-cell *matHeaderCellDef> claimId</th>
-      <td mat-cell *matCellDef="let employee "> {{employee.ClaimNum}} </td>
+      <th mat-cell *matCellDef="let employee ">
+        <tr *ngFor = 'let emp of employee.claimsDetails'>
+          <td>{{emp.ClaimNum}}</td>
+        </tr>
+      </th>
     </ng-container>
   
     <ng-container matColumnDef="ClaimName">
       <th mat-header-cell *matHeaderCellDef> Claim Name </th>
-      <td mat-cell *matCellDef="let employee "> {{employee.name}} </td>
+      <th mat-cell *matCellDef="let employee ">
+        <tr *ngFor = 'let emp of employee.claimsDetails'>
+          <td>{{emp.Patientname}}</td>
+        </tr>
+      </th>
     </ng-container>
   
     <ng-container matColumnDef="SubmissionDate">
       <th mat-header-cell *matHeaderCellDef> Submission Date </th>
-      <td mat-cell *matCellDef="let employee"> {{employee.EndDate}} </td>
+      <th mat-cell *matCellDef="let employee ">
+        <tr *ngFor = 'let emp of employee.claimsDetails'>
+          <td>{{emp.EndDate | date: 'dd/MM/yyyy'}}</td>
+        </tr>
+      </th>
     </ng-container>
     <ng-container matColumnDef="Status">
       <th mat-header-cell *matHeaderCellDef> status </th>
-      <td mat-cell *matCellDef="let employee "> {{employee.PolDur}} </td>
+      <th mat-cell *matCellDef="let employee ">
+        <tr *ngFor = 'let emp of employee.claimsDetails'>
+          <td>{{emp.PolDur}}</td>
+        </tr>
+      </th>
     </ng-container>
   
     

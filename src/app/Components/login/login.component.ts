@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   forgotPassword() {
-    this.dialog.open(ForgotPasswordComponent, { width: '250px' });
+    this.dialog.open(ForgotPasswordComponent, { width: '250px', closeOnNavigation: true });
   }
 
   loginCheck(data: any) {
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', response.data.token);
 
         if (response.data.role == 'user') {
-          this.router.navigate(['user']); //redirect to user component
+          this.router.navigate(['admin']); //redirect to user component
         } else if (response.data.role == 'admin') {
           this.router.navigate(['admin']); //redirect to admin component
         } else {
