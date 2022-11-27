@@ -11,7 +11,7 @@ import { LogoutComponent } from './Components/logout/logout.component';
 import { ApiService } from 'src/app/Services/api.services';
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
 import { UserViewComponent } from './Components/user-view/user-view.component';
-import { AdminViewComponent } from './Components/admin-view/admin-view.component';
+import { PopUp1Component } from './Components/PopUp1/pop-up1.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,8 +24,8 @@ const routes: Routes = [
   { path: 'signUp', component: RegisterUserComponent },
   { path: 'claims', component: ClaimsComponent, canActivate: [ApiService] },
   { path: 'forgotPassword', component: ForgotPasswordComponent },
-  { path: 'user', component: UserViewComponent },
-  { path: 'admin', component: AdminViewComponent },
+  { path: 'userView', component: UserViewComponent },
+  { path: 'adminView', component: PopUp1Component },
   { path: '**', redirectTo: '' },
 ];
 

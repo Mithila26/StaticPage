@@ -40,6 +40,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PopUpComponent } from './Components/pop-up/pop-up.component';
+import { PopUp1Component } from './Components/PopUp1/pop-up1.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { PopUpComponent } from './Components/pop-up/pop-up.component';
     ForgotPasswordComponent,
     UserViewComponent,
     AdminViewComponent,
-    PopUpComponent
+    PopUpComponent,
+    PopUp1Component
   ],
   imports: [
     BrowserModule,

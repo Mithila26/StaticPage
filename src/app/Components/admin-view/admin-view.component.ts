@@ -42,7 +42,6 @@ export class AdminViewComponent {
           this.source.push(i);
         })
       })
-      console.log(this.source);
     })
   }
 
