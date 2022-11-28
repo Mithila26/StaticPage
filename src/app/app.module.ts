@@ -41,6 +41,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PopUpComponent } from './Components/pop-up/pop-up.component';
 import { PopUp1Component } from './Components/PopUp1/pop-up1.component';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { PopUp1Component } from './Components/PopUp1/pop-up1.component';
     MatTableModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxWebstorageModule.forRoot()
   ],
   providers: [
     {

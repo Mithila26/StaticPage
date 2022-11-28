@@ -31,11 +31,11 @@ export class LoginComponent implements OnInit {
 
   loginCheck(data: any) {
     this.customerService.login(this.login).subscribe(response => {
-
       if (response.success == true) {
         // this.token = JSON.stringify(response.data.token);
         // this.token = this.token.replace(/"/g,'');
         localStorage.setItem('token', response.data.token);
+        // localStorage.setItem('currentUser', this.login.email);
 
         if (response.data.role == 'user') {
           this.router.navigate(['userView']); //redirect to user component

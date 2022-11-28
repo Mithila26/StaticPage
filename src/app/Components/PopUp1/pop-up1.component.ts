@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/Services/api.services';
 import { PopUpComponent } from '../pop-up/pop-up.component';
 
@@ -29,7 +30,7 @@ export class PopUp1Component implements OnInit {
   source: any = [];
   claimData: any = [];
 
-  constructor(private adminAPIservice: ApiService, private Dialogref: MatDialog) {
+  constructor(private adminAPIservice: ApiService, private Dialogref: MatDialog,private route: Router) {
     this.adminAPIservice.getDetails().subscribe((data) => {
       this.source = data;
       this.source.forEach( (claim: any) => {
@@ -42,6 +43,9 @@ export class PopUp1Component implements OnInit {
     this.dataSource = new MatTableDataSource(this.claimData);
 
   }
+  logout(){
+    this.route.navigate(['home'])
+   }
   ngOnInit(): void {
     throw ('Method not implemented.');
   }

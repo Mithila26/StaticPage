@@ -10,17 +10,17 @@ export class CustomerService {
   constructor(private http: HttpClient) { }
 
   login(login: any): Observable<any> {
-    let url = "http://localhost:3000/user/login";
+    let url = "http://localhost:3004/user/login";
     return this.http.post(url, login);
   }
 
   signUp(details: any): Observable<any> {
-    let url = "http://localhost:3000/user/signUp";
+    let url = "http://localhost:3004/user/signUp";
     return this.http.post(url, details);
   }
 
   resetPassword(details: any): Observable<any> {
-    let url = "http://localhost:3000/user/resetPassword";
+    let url = "http://localhost:3004/user/resetPassword";
     return this.http.patch(url, details);
   }
 
