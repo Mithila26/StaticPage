@@ -1,16 +1,14 @@
-<!-- <app-header></app-header> -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-
     <div class="d-flex align-items-center">
-      <mat-icon style="margin-left: 1080px;" routerLink="/userView">list</mat-icon>
-      <mat-icon  (click)="logout()">login</mat-icon>
+      <mat-icon aria-hidden="false" style="margin-left: 1070px ;" routerLink="/userView">list</mat-icon>
+      <mat-icon aria-hidden="false" (click)="logout()">login</mat-icon>
+      <span class="example-spacer"> </span>
       
     </div>
   </div>
-
 </nav>
-
 <div>
   <h1 class="text-center">Create Your Claims Request in one click! Quick and Hassle free 😃</h1>
 </div>
@@ -38,7 +36,7 @@
             <br />
             <mat-form-field class="full-width">
               <mat-label>Agency Number</mat-label>
-              <input matInput placeholder="AgencyNum" formControlName="AgencyNum" required>
+              <input matInput placeholder="AgencyNum" formControlName="AgencyNum" minlength="3" required>
             </mat-form-field>
             <div *ngIf="firstFormGroup.get('AgencyNum')?.touched &&  firstFormGroup.get('AgencyNum')?.invalid"
               class="alert alert-info">
@@ -47,6 +45,9 @@
               </div>
               <div *ngIf="firstFormGroup.get('AgencyNum')?.hasError('pattern')">
                 Please Enter Valid Agency Number
+              </div>
+              <div *ngIf="this.firstFormGroup.value.AgencyNum.length < 3">
+                Agency Number should have minimum three digits
               </div>
             </div>
             <br />
@@ -66,7 +67,7 @@
             <br />
             <mat-form-field class="full-width">
               <mat-label>Patient ID</mat-label>
-              <input matInput placeholder="PatientID" formControlName="PatientID" required>
+              <input matInput placeholder="PatientID" formControlName="PatientID" minlength="3" required>
             </mat-form-field>
             <div *ngIf="firstFormGroup.get('PatientID')?.touched &&  firstFormGroup.get('PatientID')?.invalid"
               class="alert alert-info">
@@ -75,6 +76,9 @@
               </div>
               <div *ngIf="firstFormGroup.get('PatientID')?.hasError('pattern')">
                 Please Enter Valid Patient ID
+              </div>
+              <div *ngIf="this.firstFormGroup.value.PatientID.length < 3">
+                PatientID should have minimum three characters
               </div>
             </div>
             <br />
@@ -95,7 +99,8 @@
 
             <mat-form-field class="full-width">
               <mat-label>Contact Number</mat-label>
-              <textarea matInput placeholder="Patientcontact" formControlName="Patientcontact" maxlength="10" required>
+              <textarea matInput placeholder="Patientcontact" formControlName="Patientcontact" maxlength="10"
+                minlength="10" required>
                </textarea>
             </mat-form-field>
             <div *ngIf="firstFormGroup.get('Patientcontact')?.touched &&  firstFormGroup.get('Patientcontact')?.invalid"
@@ -105,6 +110,9 @@
               </div>
               <div *ngIf="firstFormGroup.get('Patientcontact')?.hasError('pattern')">
                 Please Enter Valid contact number
+              </div>
+              <div *ngIf="this.firstFormGroup.value.Patientcontact.length <10">
+                Please check the Number of digits in contact number
               </div>
             </div>
             <div>
@@ -324,9 +332,9 @@
           <p>You are now done.</p>
 
           <mat-list>
-            <mat-list-item> <strong>Name :</strong> {{ this.firstFormGroup.value.name }}</mat-list-item>
-            <mat-list-item> <strong>Contact :</strong> {{ this.firstFormGroup.value.contact }}</mat-list-item>
-            <mat-list-item> <strong>Email ID :</strong> {{ this.secondFormGroup.value.Eligible }}</mat-list-item>
+            <mat-list-item> <strong>Name :</strong> {{ this.firstFormGroup.value.Patientname }}</mat-list-item>
+            <mat-list-item> <strong>Contact :</strong> {{ this.firstFormGroup.value.Patientcontact }}</mat-list-item>
+            <mat-list-item> <strong>Email ID :</strong> {{ this.firstFormGroup.value.Patientemail }}</mat-list-item>
             <mat-list-item> <strong>Policy Amount :</strong> {{ this.secondFormGroup.value.PolAmt }}</mat-list-item>
             <mat-list-item> <strong>Policy Duration :</strong> {{ this.secondFormGroup.value.PolDur }}</mat-list-item>
             <mat-list-item> <strong>Claim Amount :</strong> {{ this.thirdFormGroup.value.ClaimAmt }}</mat-list-item>
@@ -345,5 +353,4 @@
     </mat-card-content>
   </mat-card>
 </div>
-
 <app-footer></app-footer>
