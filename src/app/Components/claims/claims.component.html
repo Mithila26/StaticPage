@@ -1,361 +1,356 @@
-<app-header></app-header>
 
-<body>
-
-  <div>
-    <h1 class="text-center">Create Your Claims Request in one click! Quick and Hassle free 😃</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <div class="d-flex align-items-center">
+      <mat-icon aria-hidden="false" style="margin-left: 1070px ;" routerLink="/userView">list</mat-icon>
+      <mat-icon aria-hidden="false" (click)="logout()">login</mat-icon>
+      <span class="example-spacer"> </span>
+      
+    </div>
   </div>
+</nav>
+<div>
+  <h1 class="text-center">Create Your Claims Request in one click! Quick and Hassle free 😃</h1>
+</div>
 
-  <div class="col-md-8 offset-md-2">
-    <mat-card class="my-card">
-      <mat-card-content>
-        <mat-horizontal-stepper [linear]="isLinear" #stepper>
-          <mat-step [stepControl]="firstFormGroup">
-            <form [formGroup]="firstFormGroup">
-              <ng-template matStepLabel>Patient Details</ng-template>
-              <mat-form-field class="full-width">
-                <mat-label>Claim Number</mat-label>
-                <input matInput placeholder="ClaimNum" formControlName="ClaimNum" required>
-              </mat-form-field>
-              <div *ngIf="firstFormGroup.get('ClaimNum')?.touched &&  firstFormGroup.get('ClaimNum')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="firstFormGroup.get('ClaimNum')?.hasError('required')">
-                  Please Enter Claim Number
-                </div>
-                <div *ngIf="firstFormGroup.get('ClaimNum')?.hasError('pattern')">
-                  Please Enter Valid Claim Number
-                </div>
+<div class="col-md-8 offset-md-2">
+  <mat-card class="my-card">
+    <mat-card-content>
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Patient Details</ng-template>
+            <mat-form-field class="full-width">
+              <mat-label>Claim Number</mat-label>
+              <input matInput placeholder="ClaimNum" formControlName="ClaimNum" required>
+            </mat-form-field>
+            <div *ngIf="firstFormGroup.get('ClaimNum')?.touched &&  firstFormGroup.get('ClaimNum')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="firstFormGroup.get('ClaimNum')?.hasError('required')">
+                Please Enter Claim Number
               </div>
-              <br />
-              <mat-form-field class="full-width">
-                <mat-label>Agency Number</mat-label>
-                <input matInput placeholder="AgencyNum" formControlName="AgencyNum"  minlength="3" required>
-              </mat-form-field>
-              <div *ngIf="firstFormGroup.get('AgencyNum')?.touched &&  firstFormGroup.get('AgencyNum')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="firstFormGroup.get('AgencyNum')?.hasError('required')">
-                  Please Enter Agency Number
-                </div>
-                <div *ngIf="firstFormGroup.get('AgencyNum')?.hasError('pattern')">
-                  Please Enter Valid Agency Number
-                </div>
-                <div *ngIf="this.firstFormGroup.value.AgencyNum.length < 3">
-                  Agency Number should have minimum three digits
-                </div>
+              <div *ngIf="firstFormGroup.get('ClaimNum')?.hasError('pattern')">
+                Please Enter Valid Claim Number
               </div>
-              <br />
-              <mat-form-field class="full-width">
-                <mat-label>Patient Name</mat-label>
-                <input matInput placeholder="Patientname" formControlName="Patientname" required>
-              </mat-form-field>
-              <div *ngIf="firstFormGroup.get('Patientname')?.touched &&  firstFormGroup.get('Patientname')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="firstFormGroup.get('Patientname')?.hasError('required')">
-                  Please Enter Full Name
-                </div>
-                <div *ngIf="firstFormGroup.get('Patientname')?.hasError('pattern')">
-                  Please Enter Valid Full Name
-                </div>
+            </div>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-label>Agency Number</mat-label>
+              <input matInput placeholder="AgencyNum" formControlName="AgencyNum" minlength="3" required>
+            </mat-form-field>
+            <div *ngIf="firstFormGroup.get('AgencyNum')?.touched &&  firstFormGroup.get('AgencyNum')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="firstFormGroup.get('AgencyNum')?.hasError('required')">
+                Please Enter Agency Number
               </div>
-              <br />
-              <mat-form-field class="full-width">
-                <mat-label>Patient ID</mat-label>
-                <input matInput placeholder="PatientID" formControlName="PatientID"  minlength="3" required>
-              </mat-form-field>
-              <div *ngIf="firstFormGroup.get('PatientID')?.touched &&  firstFormGroup.get('PatientID')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="firstFormGroup.get('PatientID')?.hasError('required')">
-                  Please Enter Patient ID
-                </div>
-                <div *ngIf="firstFormGroup.get('PatientID')?.hasError('pattern')">
-                  Please Enter Valid Patient ID
-                </div>
-                <div *ngIf="this.firstFormGroup.value.PatientID.length < 3">
-                  PatientID should have minimum three characters
-                </div>
+              <div *ngIf="firstFormGroup.get('AgencyNum')?.hasError('pattern')">
+                Please Enter Valid Agency Number
               </div>
-              <br />
-              <mat-form-field class="full-width">
-                <mat-label>Email ID</mat-label>
-                <input matInput placeholder="Patientemail" formControlName="Patientemail" required>
-              </mat-form-field>
-              <div *ngIf="firstFormGroup.get('Patientemail')?.touched &&  firstFormGroup.get('Patientemail')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="firstFormGroup.get('Patientemail')?.hasError('required')">
-                  Please Enter Email ID
-                </div>
-                <div *ngIf="firstFormGroup.get('Patientemail')?.hasError('pattern')">
-                  Please Enter Valid Email ID
-                </div>
+              <div *ngIf="this.firstFormGroup.value.AgencyNum.length < 3">
+                Agency Number should have minimum three digits
               </div>
-              <br />
+            </div>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-label>Patient Name</mat-label>
+              <input matInput placeholder="Patientname" formControlName="Patientname" required>
+            </mat-form-field>
+            <div *ngIf="firstFormGroup.get('Patientname')?.touched &&  firstFormGroup.get('Patientname')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="firstFormGroup.get('Patientname')?.hasError('required')">
+                Please Enter Full Name
+              </div>
+              <div *ngIf="firstFormGroup.get('Patientname')?.hasError('pattern')">
+                Please Enter Valid Full Name
+              </div>
+            </div>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-label>Patient ID</mat-label>
+              <input matInput placeholder="PatientID" formControlName="PatientID" minlength="3" required>
+            </mat-form-field>
+            <div *ngIf="firstFormGroup.get('PatientID')?.touched &&  firstFormGroup.get('PatientID')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="firstFormGroup.get('PatientID')?.hasError('required')">
+                Please Enter Patient ID
+              </div>
+              <div *ngIf="firstFormGroup.get('PatientID')?.hasError('pattern')">
+                Please Enter Valid Patient ID
+              </div>
+              <div *ngIf="this.firstFormGroup.value.PatientID.length < 3">
+                PatientID should have minimum three characters
+              </div>
+            </div>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-label>Email ID</mat-label>
+              <input matInput placeholder="Patientemail" formControlName="Patientemail" required>
+            </mat-form-field>
+            <div *ngIf="firstFormGroup.get('Patientemail')?.touched &&  firstFormGroup.get('Patientemail')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="firstFormGroup.get('Patientemail')?.hasError('required')">
+                Please Enter Email ID
+              </div>
+              <div *ngIf="firstFormGroup.get('Patientemail')?.hasError('pattern')">
+                Please Enter Valid Email ID
+              </div>
+            </div>
+            <br />
 
-              <mat-form-field class="full-width">
-                <mat-label>Contact Number</mat-label>
-                <textarea matInput placeholder="Patientcontact" formControlName="Patientcontact" maxlength="10" minlength="10" required>
+            <mat-form-field class="full-width">
+              <mat-label>Contact Number</mat-label>
+              <textarea matInput placeholder="Patientcontact" formControlName="Patientcontact" maxlength="10"
+                minlength="10" required>
                </textarea>
-              </mat-form-field>
-              <div *ngIf="firstFormGroup.get('Patientcontact')?.touched &&  firstFormGroup.get('Patientcontact')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="firstFormGroup.get('Patientcontact')?.hasError('required')">
-                  Please Enter contact number
-                </div>
-                <div *ngIf="firstFormGroup.get('Patientcontact')?.hasError('pattern')">
-                  Please Enter Valid contact number
-                </div>
-                <div *ngIf="this.firstFormGroup.value.Patientcontact.length <10">
-                  Please check the Number of digits in contact number
-                </div>
+            </mat-form-field>
+            <div *ngIf="firstFormGroup.get('Patientcontact')?.touched &&  firstFormGroup.get('Patientcontact')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="firstFormGroup.get('Patientcontact')?.hasError('required')">
+                Please Enter contact number
               </div>
-              <div>
-                <button mat-button matStepperNext>Next</button>
+              <div *ngIf="firstFormGroup.get('Patientcontact')?.hasError('pattern')">
+                Please Enter Valid contact number
               </div>
-            </form>
-          </mat-step>
+              <div *ngIf="this.firstFormGroup.value.Patientcontact.length <10">
+                Please check the Number of digits in contact number
+              </div>
+            </div>
+            <div>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
 
-          <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="secondFormGroup">
-              <ng-template matStepLabel>Treatment Details</ng-template>
-              <mat-form-field>
-                <mat-label>Inpatient Start Date</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="StartDate" required>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-              <div *ngIf="secondFormGroup.get('StartDate')?.touched &&  secondFormGroup.get('StartDate')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="secondFormGroup.get('StartDate')?.hasError('required')">
-                  Please Enter Start Date
-                </div>
-                <div *ngIf="secondFormGroup.get('StartDate')?.hasError('pattern')">
-                  Please Enter Valid Start Date
-                </div>
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Treatment Details</ng-template>
+            <mat-form-field>
+              <mat-label>Inpatient Start Date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="StartDate" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div *ngIf="secondFormGroup.get('StartDate')?.touched &&  secondFormGroup.get('StartDate')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="secondFormGroup.get('StartDate')?.hasError('required')">
+                Please Enter Start Date
               </div>
+              <div *ngIf="secondFormGroup.get('StartDate')?.hasError('pattern')">
+                Please Enter Valid Start Date
+              </div>
+            </div>
 
-              <mat-form-field>
-                <mat-label>Inpatient End Date</mat-label>
-                <input matInput [matDatepicker]="picker1" formControlName="EndDate" required>
-                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
-              </mat-form-field>
-              <div *ngIf="secondFormGroup.get('EndDate')?.touched &&  secondFormGroup.get('EndDate')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="secondFormGroup.get('EndDate')?.hasError('required')">
-                  Please Enter Start Date
-                </div>
-                <div *ngIf="secondFormGroup.get('EndDate')?.hasError('pattern')">
-                  Please Enter Valid Start Date
-                </div>
+            <mat-form-field>
+              <mat-label>Inpatient End Date</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="EndDate" required>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <div *ngIf="secondFormGroup.get('EndDate')?.touched &&  secondFormGroup.get('EndDate')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="secondFormGroup.get('EndDate')?.hasError('required')">
+                Please Enter Start Date
               </div>
-              <br />
-              <mat-form-field class="full-width">
-                <mat-label>Enter treatment details</mat-label>
-                <input matInput placeholder="Treatment" formControlName="Treatment" required>
-              </mat-form-field>
-              <div *ngIf="secondFormGroup.get('Treatment')?.touched &&  secondFormGroup.get('Treatment')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="secondFormGroup.get('Treatment')?.hasError('required')">
-                  Please Enter Treatment Details
-                </div>
-                <div *ngIf="secondFormGroup.get('Treatment')?.hasError('pattern')">
-                  Please Enter Valid Treatment Details
-                </div>
+              <div *ngIf="secondFormGroup.get('EndDate')?.hasError('pattern')">
+                Please Enter Valid Start Date
               </div>
-              <br />
-              <mat-form-field class="full-width">
-                <mat-label>Enter Policy Duration</mat-label>
-                <input matInput placeholder="PolDur" formControlName="PolDur" required>
-              </mat-form-field>
-              <div *ngIf="secondFormGroup.get('PolDur')?.touched &&  secondFormGroup.get('PolDur')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="secondFormGroup.get('PolDur')?.hasError('required')">
-                  Please Enter Policy Duration
-                </div>
-                <div *ngIf="secondFormGroup.get('PolDur')?.hasError('pattern')">
-                  Please Enter Valid Policy Duration
-                </div>
+            </div>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-label>Enter treatment details</mat-label>
+              <input matInput placeholder="Treatment" formControlName="Treatment" required>
+            </mat-form-field>
+            <div *ngIf="secondFormGroup.get('Treatment')?.touched &&  secondFormGroup.get('Treatment')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="secondFormGroup.get('Treatment')?.hasError('required')">
+                Please Enter Treatment Details
               </div>
-              <br />
-              <mat-form-field class="full-width">
-                <mat-label>Enter Policy Amount</mat-label>
-                <input matInput placeholder="PolAmt" formControlName="PolAmt" required>
-              </mat-form-field>
-              <div *ngIf="secondFormGroup.get('PolAmt')?.touched && secondFormGroup.get('PolAmt')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="secondFormGroup.get('PolAmt')?.hasError('required')">
-                  Please Enter Policy Amount
-                </div>
-                <div *ngIf="secondFormGroup.get('PolAmt')?.hasError('pattern')">
-                  Please Enter Valid Policy Amount
-                </div>
+              <div *ngIf="secondFormGroup.get('Treatment')?.hasError('pattern')">
+                Please Enter Valid Treatment Details
               </div>
-              <br />
+            </div>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-label>Enter Policy Duration</mat-label>
+              <input matInput placeholder="PolDur" formControlName="PolDur" required>
+            </mat-form-field>
+            <div *ngIf="secondFormGroup.get('PolDur')?.touched &&  secondFormGroup.get('PolDur')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="secondFormGroup.get('PolDur')?.hasError('required')">
+                Please Enter Policy Duration
+              </div>
+              <div *ngIf="secondFormGroup.get('PolDur')?.hasError('pattern')">
+                Please Enter Valid Policy Duration
+              </div>
+            </div>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-label>Enter Policy Amount</mat-label>
+              <input matInput placeholder="PolAmt" formControlName="PolAmt" required>
+            </mat-form-field>
+            <div *ngIf="secondFormGroup.get('PolAmt')?.touched && secondFormGroup.get('PolAmt')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="secondFormGroup.get('PolAmt')?.hasError('required')">
+                Please Enter Policy Amount
+              </div>
+              <div *ngIf="secondFormGroup.get('PolAmt')?.hasError('pattern')">
+                Please Enter Valid Policy Amount
+              </div>
+            </div>
+            <br />
 
-              <mat-form-field class="full-width">
-                <mat-label>Enter Eligible Amount</mat-label>
-                <input matInput placeholder="Eligible" formControlName="Eligible" required>
-              </mat-form-field>
-              <div *ngIf="secondFormGroup.get('Eligible')?.touched &&  secondFormGroup.get('Eligible')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="secondFormGroup.get('Eligible')?.hasError('required')">
-                  Please Enter Eligible Amount
-                </div>
-                <div *ngIf="secondFormGroup.get('Eligible')?.hasError('pattern')">
-                  Please Enter Valid Eligible Amount
-                </div>
+            <mat-form-field class="full-width">
+              <mat-label>Enter Eligible Amount</mat-label>
+              <input matInput placeholder="Eligible" formControlName="Eligible" required>
+            </mat-form-field>
+            <div *ngIf="secondFormGroup.get('Eligible')?.touched &&  secondFormGroup.get('Eligible')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="secondFormGroup.get('Eligible')?.hasError('required')">
+                Please Enter Eligible Amount
               </div>
-              <br />
-
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+              <div *ngIf="secondFormGroup.get('Eligible')?.hasError('pattern')">
+                Please Enter Valid Eligible Amount
               </div>
-            </form>
-          </mat-step>
-
-          <mat-step [stepControl]="thirdFormGroup">
-            <form [formGroup]="thirdFormGroup">
-              <ng-template matStepLabel>Premium Details</ng-template>
-              <mat-form-field class="full-width">
-                <mat-label>Enter Claim Amount</mat-label>
-                <input matInput placeholder="ClaimAmt" formControlName="ClaimAmt" required>
-              </mat-form-field>
-              <div *ngIf="thirdFormGroup.get('ClaimAmt')?.touched &&  thirdFormGroup.get('ClaimAmt')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="thirdFormGroup.get('ClaimAmt')?.hasError('required')">
-                  Please Enter Claim Amount
-                </div>
-                <div *ngIf="thirdFormGroup.get('ClaimAmt')?.hasError('pattern')">
-                  Please Enter Valid Claim Amount
-                </div>
-              </div>
-              <br />
-              <mat-form-field class="full-width">
-                <mat-label>Total Coverage amount</mat-label>
-                <input matInput placeholder="Coverage" formControlName="Coverage" required>
-              </mat-form-field>
-              <div *ngIf="thirdFormGroup.get('Coverage')?.touched &&  thirdFormGroup.get('Coverage')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="thirdFormGroup.get('Coverage')?.hasError('required')">
-                  Please Enter Coverage Amount
-                </div>
-                <div *ngIf="thirdFormGroup.get('Coverage')?.hasError('pattern')">
-                  Please Enter Valid Coverage Amount
-                </div>
-              </div>
-              <br />
-              <mat-form-field class="full-width">
-                <mat-label>Enter Premium amount</mat-label>
-                <input matInput placeholder="Premium" formControlName="Premium" required>
-              </mat-form-field>
-              <div *ngIf="thirdFormGroup.get('Premium')?.touched &&  thirdFormGroup.get('Premium')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="thirdFormGroup.get('Premium')?.hasError('required')">
-                  Please Enter Premium Amount
-                </div>
-                <div *ngIf="thirdFormGroup.get('Premium')?.hasError('pattern')">
-                  Please Enter Valid Premium Amount
-                </div>
-              </div>
-              <br />
-              <mat-form-field class="full-width">
-                <mat-label>Enter Due Amount</mat-label>
-                <input matInput placeholder="DueAmt" formControlName="DueAmt" required>
-              </mat-form-field>
-              <div *ngIf="thirdFormGroup.get('DueAmt')?.touched &&  thirdFormGroup.get('DueAmt')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="thirdFormGroup.get('DueAmt')?.hasError('required')">
-                  Please Enter Due Amount
-                </div>
-                <div *ngIf="thirdFormGroup.get('DueAmt')?.hasError('pattern')">
-                  Please Enter Valid Due Amount
-                </div>
-              </div>
-              <br />
-              <mat-form-field class="full-width">
-                <mat-label>Enter Balance</mat-label>
-                <input matInput placeholder="Balance" formControlName="Balance" required>
-              </mat-form-field>
-              <div *ngIf="thirdFormGroup.get('Balance')?.touched &&  thirdFormGroup.get('Balance')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="thirdFormGroup.get('Balance')?.hasError('required')">
-                  Please Enter Balance Amount
-                </div>
-                <div *ngIf="thirdFormGroup.get('Balance')?.hasError('pattern')">
-                  Please Enter Valid Balance Amount
-                </div>
-              </div>
-              <br />
-              <mat-form-field>
-                <mat-label>Statement Date</mat-label>
-                <input matInput [matDatepicker]="picker2" formControlName="StatDate" required>
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Due Date</mat-label>
-                <input matInput [matDatepicker]="picker3" formControlName="DueDate" required>
-                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                <mat-datepicker #picker3></mat-datepicker>
-              </mat-form-field>
-              <br />
-              <mat-form-field class="full-width">
-                <mat-label>Payment in Total</mat-label>
-                <input matInput placeholder="Payment" formControlName="Payment" required>
-              </mat-form-field>
-              <div *ngIf="thirdFormGroup.get('Payment')?.touched &&  thirdFormGroup.get('Payment')?.invalid"
-                class="alert alert-info">
-                <div *ngIf="thirdFormGroup.get('Payment')?.hasError('required')">
-                  Please Enter Payment Amount
-                </div>
-                <div *ngIf="thirdFormGroup.get('Payment')?.hasError('pattern')">
-                  Please Enter Valid Payment Amount
-                </div>
-              </div>
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-              </div>
-            </form>
-          </mat-step>
-
-          <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
-            <p>You are now done.</p>
-
-            <mat-list>
-              <mat-list-item> <strong>Name :</strong> {{ this.firstFormGroup.value.Patientname }}</mat-list-item>
-              <mat-list-item> <strong>Contact :</strong> {{ this.firstFormGroup.value.Patientcontact }}</mat-list-item>
-              <mat-list-item> <strong>Email ID :</strong> {{ this.firstFormGroup.value.Patientemail }}</mat-list-item>
-              <mat-list-item> <strong>Policy Amount :</strong> {{ this.secondFormGroup.value.PolAmt }}</mat-list-item>
-              <mat-list-item> <strong>Policy Duration :</strong> {{ this.secondFormGroup.value.PolDur }}</mat-list-item>
-              <mat-list-item> <strong>Claim Amount :</strong> {{ this.thirdFormGroup.value.ClaimAmt }}</mat-list-item>
-              <mat-list-item> <strong>Total Coverage :</strong> {{ this.thirdFormGroup.value.Coverage }}</mat-list-item>
-              <mat-list-item> <strong>Payment in Total :</strong> {{ this.thirdFormGroup.value.Payment }}
-              </mat-list-item>
-            </mat-list>
+            </div>
+            <br />
 
             <div>
               <button mat-button matStepperPrevious>Back</button>
-              <button mat-button (click)="stepper.reset()">Reset</button>
-              <button mat-button (click)="submit()" routerLink="/registerClaim">Submit</button>
+              <button mat-button matStepperNext>Next</button>
             </div>
-          </mat-step>
-        </mat-horizontal-stepper>
-      </mat-card-content>
-    </mat-card>
-  </div>
+          </form>
+        </mat-step>
 
+        <mat-step [stepControl]="thirdFormGroup">
+          <form [formGroup]="thirdFormGroup">
+            <ng-template matStepLabel>Premium Details</ng-template>
+            <mat-form-field class="full-width">
+              <mat-label>Enter Claim Amount</mat-label>
+              <input matInput placeholder="ClaimAmt" formControlName="ClaimAmt" required>
+            </mat-form-field>
+            <div *ngIf="thirdFormGroup.get('ClaimAmt')?.touched &&  thirdFormGroup.get('ClaimAmt')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="thirdFormGroup.get('ClaimAmt')?.hasError('required')">
+                Please Enter Claim Amount
+              </div>
+              <div *ngIf="thirdFormGroup.get('ClaimAmt')?.hasError('pattern')">
+                Please Enter Valid Claim Amount
+              </div>
+            </div>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-label>Total Coverage amount</mat-label>
+              <input matInput placeholder="Coverage" formControlName="Coverage" required>
+            </mat-form-field>
+            <div *ngIf="thirdFormGroup.get('Coverage')?.touched &&  thirdFormGroup.get('Coverage')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="thirdFormGroup.get('Coverage')?.hasError('required')">
+                Please Enter Coverage Amount
+              </div>
+              <div *ngIf="thirdFormGroup.get('Coverage')?.hasError('pattern')">
+                Please Enter Valid Coverage Amount
+              </div>
+            </div>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-label>Enter Premium amount</mat-label>
+              <input matInput placeholder="Premium" formControlName="Premium" required>
+            </mat-form-field>
+            <div *ngIf="thirdFormGroup.get('Premium')?.touched &&  thirdFormGroup.get('Premium')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="thirdFormGroup.get('Premium')?.hasError('required')">
+                Please Enter Premium Amount
+              </div>
+              <div *ngIf="thirdFormGroup.get('Premium')?.hasError('pattern')">
+                Please Enter Valid Premium Amount
+              </div>
+            </div>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-label>Enter Due Amount</mat-label>
+              <input matInput placeholder="DueAmt" formControlName="DueAmt" required>
+            </mat-form-field>
+            <div *ngIf="thirdFormGroup.get('DueAmt')?.touched &&  thirdFormGroup.get('DueAmt')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="thirdFormGroup.get('DueAmt')?.hasError('required')">
+                Please Enter Due Amount
+              </div>
+              <div *ngIf="thirdFormGroup.get('DueAmt')?.hasError('pattern')">
+                Please Enter Valid Due Amount
+              </div>
+            </div>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-label>Enter Balance</mat-label>
+              <input matInput placeholder="Balance" formControlName="Balance" required>
+            </mat-form-field>
+            <div *ngIf="thirdFormGroup.get('Balance')?.touched &&  thirdFormGroup.get('Balance')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="thirdFormGroup.get('Balance')?.hasError('required')">
+                Please Enter Balance Amount
+              </div>
+              <div *ngIf="thirdFormGroup.get('Balance')?.hasError('pattern')">
+                Please Enter Valid Balance Amount
+              </div>
+            </div>
+            <br />
+            <mat-form-field>
+              <mat-label>Statement Date</mat-label>
+              <input matInput [matDatepicker]="picker2" formControlName="StatDate" required>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Due Date</mat-label>
+              <input matInput [matDatepicker]="picker3" formControlName="DueDate" required>
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-label>Payment in Total</mat-label>
+              <input matInput placeholder="Payment" formControlName="Payment" required>
+            </mat-form-field>
+            <div *ngIf="thirdFormGroup.get('Payment')?.touched &&  thirdFormGroup.get('Payment')?.invalid"
+              class="alert alert-info">
+              <div *ngIf="thirdFormGroup.get('Payment')?.hasError('required')">
+                Please Enter Payment Amount
+              </div>
+              <div *ngIf="thirdFormGroup.get('Payment')?.hasError('pattern')">
+                Please Enter Valid Payment Amount
+              </div>
+            </div>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
 
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
 
+          <mat-list>
+            <mat-list-item> <strong>Name :</strong> {{ this.firstFormGroup.value.Patientname }}</mat-list-item>
+            <mat-list-item> <strong>Contact :</strong> {{ this.firstFormGroup.value.Patientcontact }}</mat-list-item>
+            <mat-list-item> <strong>Email ID :</strong> {{ this.firstFormGroup.value.Patientemail }}</mat-list-item>
+            <mat-list-item> <strong>Policy Amount :</strong> {{ this.secondFormGroup.value.PolAmt }}</mat-list-item>
+            <mat-list-item> <strong>Policy Duration :</strong> {{ this.secondFormGroup.value.PolDur }}</mat-list-item>
+            <mat-list-item> <strong>Claim Amount :</strong> {{ this.thirdFormGroup.value.ClaimAmt }}</mat-list-item>
+            <mat-list-item> <strong>Total Coverage :</strong> {{ this.thirdFormGroup.value.Coverage }}</mat-list-item>
+            <mat-list-item> <strong>Payment in Total :</strong> {{ this.thirdFormGroup.value.Payment }}
+            </mat-list-item>
+          </mat-list>
 
-
-
-
-
-
-
-
-
-</body>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button (click)="submit()" routerLink="/registerClaim">Submit</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </mat-card-content>
+  </mat-card>
+</div>
 <app-footer></app-footer>

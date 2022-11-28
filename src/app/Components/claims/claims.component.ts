@@ -59,6 +59,9 @@ export class ClaimsComponent implements OnInit {
       Payment: ['', [Validators.required, Validators.pattern('[0-9]*')]]
     });
   }
+  logout(){
+    this.router.navigate(['home'])
+   }
 
   submit() {
     this.claimObj = {
@@ -84,7 +87,7 @@ export class ClaimsComponent implements OnInit {
       Patientemail: this.firstFormGroup.value.Patientemail,
       claimStatus: "Requested"
     };
-    alert(JSON.stringify(this.claimObj));
+    // alert(JSON.stringify(this.claimObj));
     console.log(this.claimObj);
     this.api.registerClaim(this.claimObj).subscribe(response => {
 
