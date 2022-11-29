@@ -18,9 +18,13 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ClaimId </th>
         <td mat-cell *matCellDef="let row"> {{row.ClaimNum}} </td>
       </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+      </ng-container>
      
       <ng-container matColumnDef="Patientname">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient Name </th>
         <td mat-cell *matCellDef="let row"> {{row.Patientname}} </td>
       </ng-container>
 
@@ -67,7 +71,7 @@
     <ng-container matColumnDef="Action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let row ">
-            <button mat-icon-button color="primary" (click)="openDialog()" title="Edit Contact">
+            <button mat-icon-button color="primary" (click)="openDialog(row.ClaimNum,row.email)" title="Edit Contact">
                 <mat-icon>edit</mat-icon>
             </button>
         </td>

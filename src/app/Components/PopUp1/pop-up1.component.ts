@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/Services/api.services';
 import { PopUpComponent } from '../pop-up/pop-up.component';
@@ -21,7 +21,7 @@ export interface UserData {
 })
 export class PopUp1Component implements OnInit {
 
-  displayedColumns: string[] = ['ClaimNum', 'Patientname', 'EndDate', 'claimStatus', 'Treatment', 'PolDur', 'PolAmt', 'Eligible', 'ClaimAmt', 'Coverage', 'Action'];
+  displayedColumns: string[] = ['ClaimNum', 'name', 'Patientname', 'EndDate', 'claimStatus', 'Treatment', 'PolDur', 'PolAmt', 'Eligible', 'ClaimAmt', 'Coverage', 'Action'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -30,22 +30,25 @@ export class PopUp1Component implements OnInit {
   source: any = [];
   claimData: any = [];
 
-  constructor(private adminAPIservice: ApiService, private Dialogref: MatDialog,private route: Router) {
+  constructor(private adminAPIservice: ApiService, private Dialogref: MatDialog, private route: Router) {
     this.adminAPIservice.getDetails().subscribe((data) => {
       this.source = data;
-      this.source.forEach( (claim: any) => {
+      // alert(JSON.stringify(this.source))
+      this.source.forEach((claim: any) => {
         claim.claimsDetails.forEach((element: any) => {
+          element.email = claim.email;
           this.claimData.push(element);
         });
       })
     })
+
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.claimData);
 
   }
-  logout(){
+  logout() {
     this.route.navigate(['home'])
-   }
+  }
   ngOnInit(): void {
     throw ('Method not implemented.');
   }
@@ -64,7 +67,18 @@ export class PopUp1Component implements OnInit {
     }
   }
 
-  openDialog() {
-    this.Dialogref.open(PopUpComponent)
+  openDialog(claimId: any, email: any) {
+    console.log(claimId);
+    let claimInfo = {
+      claimId: claimId,
+      email: email
+    }
+    this.Dialogref.open(PopUpComponent, {
+      data: claimInfo,
+      disableClose: true
+    })
+  }
+  cancelDialog() {
+    this.Dialogref.closeAll();
   }
 }

@@ -91,7 +91,7 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     MatPaginatorModule,
     NgxWebstorageModule.forRoot()
   ],
-  providers: [
+  providers: [PopUp1Component,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

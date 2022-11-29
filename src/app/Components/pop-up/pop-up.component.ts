@@ -1,46 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AdminService } from 'src/app/Services/admin.service';
+import { PopUp1Component } from '../PopUp1/pop-up1.component';
+
 @Component({
   selector: 'app-pop-up',
   templateUrl: './pop-up.component.html',
   styleUrls: ['./pop-up.component.css']
 })
-export class PopUpComponent {
+export class PopUpComponent implements OnInit {
 
   isSubmitted = false;
+  Status = [{ "name": "Verified" }, { "name": "Adjudicated" }, { "name": "Processed" }, { "name": "Settled" }, { "name": "Denied" }]
+  statusName!: string;
+  selStatus!: String;
 
-  // City Names
-  City: any = ['Verified', 'Adjudicated', 'Processed', 'Settled' , 'Denied']
 
-  constructor(public fb: FormBuilder) { }
+  constructor(public fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public dialogData: any, public adminService: AdminService, public dialRef: PopUp1Component) { }
 
   /*########### Form ###########*/
-  registrationForm = this.fb.group({
+  statusForm = this.fb.group({
     statusName: ['', [Validators.required]]
   })
-
-
-  // Choose city using select dropdown
-  changeCity(e : String) : void {
-    console.log(e.valueOf)
-   // this.cityName!.setValue(e.target.value, {
-   //   onlySelf: true
-  //  })
+  // statusName=this.Status[1]
+  ngOnInit() {
   }
 
-  // Getter method to access formcontrols
-  get cityName() {
-    return this.registrationForm.get('statusName');
+  onChange(newValue: any) {
+    // console.log(JSON.stringify(newValue) + " !!!!####!!!!");
+    this.selStatus = newValue.name;
   }
-
   /*########### Template Driven Form ###########*/
-  onSubmit():any {
+  onSubmit() {
     this.isSubmitted = true;
-    if (!this.registrationForm.valid) {
-      return false;
-    } else {
-      alert(JSON.stringify(this.registrationForm.value))
+    let data = {
+      claimId: this.dialogData.claimId,
+      email: this.dialogData.email,
+      claimStatus: this.selStatus
     }
+    console.log(data)
+    this.adminService.updateStatus(data).subscribe((data) => {
+      this.dialRef.cancelDialog();
+      window.location.reload();
+    }
+    );
 
   }
 
