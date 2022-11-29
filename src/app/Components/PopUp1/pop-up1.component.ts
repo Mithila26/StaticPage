@@ -22,7 +22,7 @@ export interface UserData {
 export class PopUp1Component implements OnInit {
 
   displayedColumns: string[] = ['ClaimNum', 'name', 'Patientname', 'EndDate', 'claimStatus', 'Treatment', 'PolDur', 'PolAmt', 'Eligible', 'ClaimAmt', 'Coverage', 'Action'];
-  dataSource: MatTableDataSource<UserData>;
+  dataSource!: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -31,26 +31,26 @@ export class PopUp1Component implements OnInit {
   claimData: any = [];
 
   constructor(private adminAPIservice: ApiService, private Dialogref: MatDialog, private route: Router) {
-    this.adminAPIservice.getDetails().subscribe((data) => {
-      this.source = data;
-      // alert(JSON.stringify(this.source))
-      this.source.forEach((claim: any) => {
-        claim.claimsDetails.forEach((element: any) => {
-          element.email = claim.email;
-          this.claimData.push(element);
-        });
-      })
-    })
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(this.claimData);
+    
 
   }
   logout() {
     this.route.navigate(['home'])
   }
   ngOnInit(): void {
-    throw ('Method not implemented.');
+    this.adminAPIservice.getDetails().subscribe((data) => {
+      this.source = data;
+      this.source.forEach((claim: any) => {
+        claim.claimsDetails.forEach((element: any) => {
+          element.email = claim.email;
+          this.claimData.push(element);
+        });
+      })
+      this.dataSource = new MatTableDataSource(this.claimData);
+    })
+
+    // Assign the data to the data source for the table to render
+    
   }
 
   ngAfterViewInit() {
