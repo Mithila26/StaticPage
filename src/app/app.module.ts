@@ -34,10 +34,10 @@ import { LogoutComponent } from './Components/logout/logout.component';
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
 import { MatDialogModule} from '@angular/material/dialog'
 import { UserViewComponent } from './Components/user-view/user-view.component';
-import { AdminViewComponent } from './Components/admin-view/admin-view.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PopUpComponent } from './Components/pop-up/pop-up.component';
 import { PopUp1Component } from './Components/PopUp1/pop-up1.component';
@@ -58,7 +58,6 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     LogoutComponent,
     ForgotPasswordComponent,
     UserViewComponent,
-    AdminViewComponent,
     PopUpComponent,
     PopUp1Component
   ],
@@ -89,6 +88,7 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     MatSortModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    MatMenuModule,
     NgxWebstorageModule.forRoot()
   ],
   providers: [PopUp1Component,

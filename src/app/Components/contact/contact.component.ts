@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CustomerService } from 'src/app/Services/customer.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,21 +15,18 @@ export class ContactComponent implements OnInit {
     message: new FormControl()
   })
 
-  resValue!: String;
-  
-  constructor(private customerService: CustomerService) { }
+  constructor() { }
 
   ngOnInit(): void { }
 
-  Submit(data: any) {
+  Submit() {
     Swal.fire({
-      position:'top-end',
       icon: 'success',
       title: 'We will contact you soon...',
       text: 'Thank you!',
       showConfirmButton: false,
       timer: 2000
-  })
+    })
     this.contactform.reset();
   }
 }

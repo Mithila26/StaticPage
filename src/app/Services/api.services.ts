@@ -1,30 +1,33 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { CustomerService } from 'src/app/Services/customer.service';
+import { Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  message: any;
-  //public isLoggedIn: boolean = false;
-  isLoggedIn: boolean | undefined;
+
+  url = 'http://localhost:3004/admin';
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
+
   constructor(private http: HttpClient, private router: Router) { }
-
-  getDataApi() {
-    this.http.get('http://localhost:3004/get').subscribe(res => {
-      console.log(res);
-      this.message = res;
-    });
-  }
-
-
 
   registerClaim(claimObj: any): Observable<any> {
     let url = "http://localhost:3004/claims/registerClaim";
-    return this.http.post(url, claimObj);
+    return this.http.put(url, claimObj);
+  }
+
+  getDetails() {
+    return this.http.get(this.url + '/details');
+  }
+
+  getUserDetails() {
+    return this.http.get(this.url + '/userDetails');
+  }
+
+  updateStatus(data: any): Observable<any> {
+    return this.http.put(this.url + '/updateStatus', data);
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -37,15 +40,4 @@ export class ApiService {
     }
   }
 
-
-  baseUri: string = "http://localhost:3004/admin/details";
-  getDetails() {
-    return this.http.get(`${this.baseUri}`);
-  }
-  getUserDetails() {
-    return this.http.get('http://localhost:3004/admin/userDetails/')
-  }
-  public getUser(){
-    return this.http.get('http://localhost:3004/admin/getUser');
-  }
 }

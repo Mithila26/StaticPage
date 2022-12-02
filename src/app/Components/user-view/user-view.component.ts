@@ -1,13 +1,12 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'ngx-webstorage';
-import { admins } from 'src/app/Services/Admins';
 import { ApiService } from 'src/app/Services/api.services';
-import { PopUpComponent } from '../pop-up/pop-up.component';
+import Swal from 'sweetalert2';
+
 export interface UserData {
   ClaimNum: string;
   Patientname: string;
@@ -21,63 +20,86 @@ export interface UserData {
   styleUrls: ['./user-view.component.css']
 })
 
-
 export class UserViewComponent implements OnInit {
 
-
   admins: any = [];
-  // columns we will show on the table
+
   public displayedColumns = ['ClaimNum', 'Patientname', 'claimStatus'];
-  //the source where we will get the data
+
   dataSource!: MatTableDataSource<UserData>;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   source: any = [];
   claimData: any = [];
-  userEmail: any;
-  local!: any;
-  //dependency injection
-  constructor(private adminAPIservice: ApiService, private Dialogref: MatDialog,private route:Router) {
+  user!: any;
+
+  constructor(private adminAPIservice: ApiService, private route: Router, private local: LocationStrategy) {
   }
-  public isEditable = false;
+
   ngOnInit() {
+    history.pushState(null, 'null', location.href);
+    this.local.onPopState(() => {
+      history.pushState(null, 'null', location.href);
+    });
 
     this.readEmployee();
-
-
   }
-  /**
-   * This method returns students details
-   */
-   logout(){
-    this.route.navigate(['home'])
-   }
-   submitClaim(){
-    this.route.navigate(['claims'])
-   }
+
+  logout() {
+    Swal.fire({
+      text: 'Are you sure you want to sign out?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sign Out'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.route.navigate(['logout']);
+      }
+    })
+  }
+
+  submitClaim() {
+    this.route.navigate(['claims']);
+  }
 
   readEmployee() {
-    this.local = localStorage.getItem('currentUser')
-    // console.log(JSON.stringify(this.local))
-    // alert(JSON.stringify(local));
+
     this.adminAPIservice.getUserDetails().subscribe((data: any) => {
-      
+
       this.source = data;
       this.source.forEach((claim: any) => {
-        console.log(JSON.stringify(claim))
+        localStorage.setItem('user', claim.userName);
         claim.claimsDetails.forEach((element: any) => {
           this.claimData.push(element);
         });
       })
-      console.log(JSON.stringify(this.claimData))
+      this.user = localStorage.getItem('user');
       this.dataSource = new MatTableDataSource(this.claimData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }, err => {
+      if (err.status == 401) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Session Expired',
+          text: 'Please LogIn Again'
+        })
+        this.route.navigate(['logout']);
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!'
+        })
+      }
     })
-    // Assign the data to the data source for the table to render
-    
-
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -86,23 +108,5 @@ export class UserViewComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-
-
-  openDialog() {
-    this.Dialogref.open(PopUpComponent);
-  }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

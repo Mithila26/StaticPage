@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
-  FormControl,
   FormArray,
   Validators
 } from '@angular/forms';
@@ -16,6 +15,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./claims.component.css'],
 })
 export class ClaimsComponent implements OnInit {
+  local = localStorage.getItem('user');
   isLinear = true;
 
   firstFormGroup!: FormGroup;
@@ -59,9 +59,21 @@ export class ClaimsComponent implements OnInit {
       Payment: ['', [Validators.required, Validators.pattern('[0-9]*')]]
     });
   }
-  logout(){
-    this.router.navigate(['home'])
-   }
+
+  logout() {
+    Swal.fire({
+      text: 'Are you sure you want to sign out?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sign Out'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['logout']);
+      }
+    })
+  }
 
   submit() {
     this.claimObj = {
@@ -87,15 +99,15 @@ export class ClaimsComponent implements OnInit {
       Patientemail: this.firstFormGroup.value.Patientemail,
       claimStatus: "Requested"
     };
-    // alert(JSON.stringify(this.claimObj));
-    console.log(this.claimObj);
+
     this.api.registerClaim(this.claimObj).subscribe(response => {
 
       if (response.success == true) {
         Swal.fire({
+          icon: 'success',
           text: 'Your claim request has been created. Have a good Day!'
         })
-        this.router.navigate(['home']);
+        this.router.navigate(['userView']);
       }
     }, err => {
       if (err.error.success == false) {
@@ -104,6 +116,7 @@ export class ClaimsComponent implements OnInit {
           title: 'Session Expired',
           text: 'Please LogIn Again'
         })
+        this.router.navigate(['logout']);
       } else {
         Swal.fire({
           icon: 'error',

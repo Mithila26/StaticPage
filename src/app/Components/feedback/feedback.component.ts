@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
-  FormBuilder,
   FormControl,
-  FormArray,
   Validators,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-feedback',
@@ -21,20 +20,27 @@ export class FeedbackComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     feedback: new FormControl(),
   });
-  constructor() {}
+
+  constructor() { }
+
   get firstname() {
     return this.feedbackform.get('firstName');
   }
-  ngOnInit(): void {}
-  onSubmit(data: any) {
-    //alert(JSON.stringify(this.feedbackform.value));
-    //if(this.feedbackform.valid){
-    alert('Thank You for your Feedback');
-    console.log('Form Submitted!');
-    this.feedbackform.reset(); //}
+
+  ngOnInit(): void { }
+
+  onSubmit() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Thank You for your Feedback',
+      showConfirmButton: false,
+      timer: 2000
+    })
+    this.feedbackform.reset();
   }
+
   clearForm() {
-    this.feedbackform.reset(); // Resets the formgroup
-    //this.answer = null;
+    this.feedbackform.reset();
   }
+
 }

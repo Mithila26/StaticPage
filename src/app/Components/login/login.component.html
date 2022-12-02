@@ -2,7 +2,7 @@
 
 <body>
     <div class="login-form">
-        <form #loginForm="ngForm" (ngSubmit)='loginCheck(loginForm)'>
+        <form #loginForm="ngForm" (ngSubmit)='loginCheck()'>
             <h2>Log in</h2>
             <div class="form-group">
                 <input type="email" #mail="ngModel" required pattern="^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
@@ -33,7 +33,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-around">
-                <button type="submit" class="btn button-success" [disabled]="loginForm.invalid">Log in <mat-icon>login</mat-icon></button>
+                <button type="submit" class="btn button-success" [disabled]="loginForm.invalid">Log in <mat-icon>login
+                    </mat-icon></button>
                 <div class="clearfix">
                     <a (click)="forgotPassword()" class="pull-right">Forgot Password?</a>
                 </div>

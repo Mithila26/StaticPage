@@ -10,19 +10,22 @@
 
             <div class="row">
                 <div class="col-md-9 mb-md-0 mb-5">
-                    <form id="contact-form" name="contact-form" [formGroup]="contactform" (ngSubmit)="Submit(contactform.value)">
+                    <form id="contact-form" name="contact-form" [formGroup]="contactform"
+                        (ngSubmit)="Submit()">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
                                     <label for="name" class="">Enter name</label>
-                                    <input type="text" id="name" name="name" class="form-control" formControlName="name" placeholder="Name">
-                                    <div *ngIf="contactform.get('name')?.touched &&  contactform.get('name')?.invalid" class="alert alert-danger">
+                                    <input type="text" id="name" name="name" class="form-control" formControlName="name"
+                                        placeholder="Name">
+                                    <div *ngIf="contactform.get('name')?.touched &&  contactform.get('name')?.invalid"
+                                        class="alert alert-danger">
                                         <div *ngIf="contactform.get('name')?.hasError('required')">
                                             Please Enter Full Name
                                         </div>
-                    
-                                        <div *ngIf="contactform.get('name')?.hasError('pattern')" >
-                                           Please Enter Valid Full Name
+
+                                        <div *ngIf="contactform.get('name')?.hasError('pattern')">
+                                            Please Enter Valid Full Name
                                         </div>
                                     </div>
                                 </div>
@@ -31,14 +34,16 @@
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
                                     <label for="email" class="">Enter email</label>
-                                    <input type="text" id="email" name="email" class="form-control" formControlName="email" placeholder="Email">
-                                    <div *ngIf="contactform.get('email')?.touched &&  contactform.get('email')?.invalid" class="alert alert-danger">
+                                    <input type="text" id="email" name="email" class="form-control"
+                                        formControlName="email" placeholder="Email">
+                                    <div *ngIf="contactform.get('email')?.touched &&  contactform.get('email')?.invalid"
+                                        class="alert alert-danger">
                                         <div *ngIf="contactform.get('email')?.hasError('required')">
                                             Please Enter Email
                                         </div>
-                    
-                                        <div *ngIf="contactform.get('email')?.hasError('pattern')" >
-                                           Please Enter Valid Email
+
+                                        <div *ngIf="contactform.get('email')?.hasError('pattern')">
+                                            Please Enter Valid Email
                                         </div>
                                     </div>
                                 </div>
@@ -49,8 +54,10 @@
                             <div class="col-md-12">
                                 <div class="md-form mb-0">
                                     <label for="subject" class="">Subject</label>
-                                    <input type="text" id="subject" name="subject" class="form-control" formControlName="subject" placeholder="Subject">
-                                    <div *ngIf="contactform.get('subject')?.touched &&  contactform.get('subject')?.invalid" class="alert alert-danger">
+                                    <input type="text" id="subject" name="subject" class="form-control"
+                                        formControlName="subject" placeholder="Subject">
+                                    <div *ngIf="contactform.get('subject')?.touched &&  contactform.get('subject')?.invalid"
+                                        class="alert alert-danger">
                                         <div *ngIf="contactform.get('subject')?.hasError('required')">
                                             Please Enter Subject
                                         </div>
@@ -64,7 +71,8 @@
                                 <div class="md-form">
                                     <label for="message">Your message</label>
                                     <textarea type="text" id="message" name="message" rows="2"
-                                        class="form-control md-textarea" formControlName="message" placeholder="Message"></textarea>
+                                        class="form-control md-textarea" formControlName="message"
+                                        placeholder="Message"></textarea>
                                 </div>
                             </div>
                         </div><br>
@@ -73,7 +81,7 @@
                             <button class="btn btn-primary" [disabled]="contactform.invalid" type="submit">Send</button>
                         </div>
 
-                    </form>                   
+                    </form>
                 </div>
 
                 <div class="col-md-3 text-center">

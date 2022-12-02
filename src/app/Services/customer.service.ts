@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,21 +7,21 @@ import { Observable } from 'rxjs';
 })
 export class CustomerService {
 
+  url = 'http://localhost:3004/user';
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
+
   constructor(private http: HttpClient) { }
 
   login(login: any): Observable<any> {
-    let url = "http://localhost:3004/user/login";
-    return this.http.post(url, login);
+    return this.http.post(this.url + '/login', login);
   }
 
   signUp(details: any): Observable<any> {
-    let url = "http://localhost:3004/user/signUp";
-    return this.http.post(url, details);
+    return this.http.post(this.url + '/signUp', details);
   }
 
   resetPassword(details: any): Observable<any> {
-    let url = "http://localhost:3004/user/resetPassword";
-    return this.http.patch(url, details);
+    return this.http.put(this.url + '/resetPassword', details);
   }
 
 }

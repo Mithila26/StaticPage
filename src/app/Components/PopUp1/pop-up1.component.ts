@@ -1,3 +1,4 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -5,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/Services/api.services';
+import Swal from 'sweetalert2';
 import { PopUpComponent } from '../pop-up/pop-up.component';
 
 export interface UserData {
@@ -30,14 +32,30 @@ export class PopUp1Component implements OnInit {
   source: any = [];
   claimData: any = [];
 
-  constructor(private adminAPIservice: ApiService, private Dialogref: MatDialog, private route: Router) {
-    
+  constructor(private adminAPIservice: ApiService, private Dialogref: MatDialog, private route: Router, private local: LocationStrategy) {
+  }
 
-  }
   logout() {
-    this.route.navigate(['home'])
+    Swal.fire({
+      text: 'Are you sure you want to sign out?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sign Out'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.route.navigate(['logout']);
+      }
+    })
   }
+
   ngOnInit(): void {
+    history.pushState(null, 'null', location.href);
+    this.local.onPopState(() => {
+      history.pushState(null, 'null', location.href);
+    })
+
     this.adminAPIservice.getDetails().subscribe((data) => {
       this.source = data;
       this.source.forEach((claim: any) => {
@@ -47,15 +65,24 @@ export class PopUp1Component implements OnInit {
         });
       })
       this.dataSource = new MatTableDataSource(this.claimData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }, err => {
+      if (err.status == 401) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Session Expired',
+          text: 'Please LogIn Again'
+        })
+        this.route.navigate(['logout']);
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!'
+        })
+      }
     })
-
-    // Assign the data to the data source for the table to render
-    
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
@@ -68,17 +95,17 @@ export class PopUp1Component implements OnInit {
   }
 
   openDialog(claimId: any, email: any) {
-    console.log(claimId);
     let claimInfo = {
       claimId: claimId,
       email: email
     }
     this.Dialogref.open(PopUpComponent, {
-      data: claimInfo,
-      disableClose: true
+      data: claimInfo
     })
   }
+
   cancelDialog() {
     this.Dialogref.closeAll();
   }
+
 }

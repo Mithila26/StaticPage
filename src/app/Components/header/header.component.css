@@ -8,10 +8,10 @@ header {
     display: inline-block;
     margin: auto auto 50px auto;
     padding: 10px 0px 10px 0px;
-       
+
 }
 
-.healthCare{
+.healthCare {
     font-family: 'Ledger', serif;
     font-style: normal;
     font-weight: 200;
@@ -19,7 +19,7 @@ header {
     text-decoration: none;
     color: #ffffff;
     float: left;
-    position:relative;
+    position: relative;
     top: 15px;
     right: 85px;
 }
@@ -33,18 +33,18 @@ header {
     font-family: 'Elsie', cursive;
     font-style: normal;
     font-weight: 200;
-           
+
 }
 
 .main-nav li {
     display: inline-block;
     margin: 20px;
     list-style: none;
-    
+
 }
 
 .main-nav li a:link,
-.main-nav li a:visited{
+.main-nav li a:visited {
     text-decoration: none;
     color: #ffffff;
     font-size: 18px;
@@ -54,7 +54,7 @@ header {
 
 }
 
-img{
+img {
     width: 4%;
     height: 4%;
     border-radius: 50%;

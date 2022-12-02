@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AdminService } from 'src/app/Services/admin.service';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/Services/api.services';
+import Swal from 'sweetalert2';
 import { PopUp1Component } from '../PopUp1/pop-up1.component';
 
 @Component({
@@ -11,41 +13,48 @@ import { PopUp1Component } from '../PopUp1/pop-up1.component';
 })
 export class PopUpComponent implements OnInit {
 
-  isSubmitted = false;
   Status = [{ "name": "Verified" }, { "name": "Adjudicated" }, { "name": "Processed" }, { "name": "Settled" }, { "name": "Denied" }]
   statusName!: string;
   selStatus!: String;
 
+  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) private dialogData: any, private adminService: ApiService, private dialRef: PopUp1Component, private route: Router) { }
 
-  constructor(public fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public dialogData: any, public adminService: AdminService, public dialRef: PopUp1Component) { }
-
-  /*########### Form ###########*/
   statusForm = this.fb.group({
     statusName: ['', [Validators.required]]
   })
-  // statusName=this.Status[1]
-  ngOnInit() {
-  }
+
+  ngOnInit() { }
 
   onChange(newValue: any) {
-    // console.log(JSON.stringify(newValue) + " !!!!####!!!!");
     this.selStatus = newValue.name;
   }
-  /*########### Template Driven Form ###########*/
+
   onSubmit() {
-    this.isSubmitted = true;
     let data = {
       claimId: this.dialogData.claimId,
       email: this.dialogData.email,
       claimStatus: this.selStatus
     }
-    console.log(data)
+
     this.adminService.updateStatus(data).subscribe((data) => {
       this.dialRef.cancelDialog();
       window.location.reload();
-    }
-    );
-
+    }, err => {
+      if (err.status == 401) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Session Expired',
+          text: 'Please LogIn Again'
+        })
+        this.route.navigate(['logout']);
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!'
+        })
+      }
+    });
   }
 
 }

@@ -1,4 +1,3 @@
-import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -14,33 +13,26 @@ import { ForgotPasswordComponent } from '../forgot-password/forgot-password.comp
 export class LoginComponent implements OnInit {
 
   login = { email: '', password: '' };
-  // token: string ='';
 
-  constructor(private router: Router, private customerService: CustomerService, private local: LocationStrategy, private dialog: MatDialog) { }
+  constructor(private router: Router, private customerService: CustomerService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    history.pushState(null, 'null', location.href);
-    this.local.onPopState(() => {
-      history.pushState(null, 'null', location.href);
-    })
   }
 
   forgotPassword() {
     this.dialog.open(ForgotPasswordComponent, { width: '250px', closeOnNavigation: true });
   }
 
-  loginCheck(data: any) {
+  loginCheck() {
     this.customerService.login(this.login).subscribe(response => {
       if (response.success == true) {
-        // this.token = JSON.stringify(response.data.token);
-        // this.token = this.token.replace(/"/g,'');
+
         localStorage.setItem('token', response.data.token);
-        // localStorage.setItem('currentUser', this.login.email);
 
         if (response.data.role == 'user') {
-          this.router.navigate(['userView']); //redirect to user component
+          this.router.navigate(['userView']);
         } else if (response.data.role == 'admin') {
-          this.router.navigate(['adminView']); //redirect to admin component
+          this.router.navigate(['adminView']);
         } else {
           this.router.navigate(['home']);
         }
