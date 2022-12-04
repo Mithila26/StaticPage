@@ -24,9 +24,12 @@ export class LoginComponent implements OnInit {
   }
 
   loginCheck() {
+    Swal.fire({title:'Please wait...',allowOutsideClick: false,
+    allowEscapeKey: false});
+    Swal.showLoading(null);
     this.customerService.login(this.login).subscribe(response => {
       if (response.success == true) {
-
+        Swal.close();
         localStorage.setItem('token', response.data.token);
 
         if (response.data.role == 'user') {
@@ -49,7 +52,7 @@ export class LoginComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!,Please try again'
+          text: 'Something went wrong!, Please try again'
         })
       }
     })

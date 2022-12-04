@@ -54,9 +54,14 @@ export class PopUp1Component implements OnInit {
     history.pushState(null, 'null', location.href);
     this.local.onPopState(() => {
       history.pushState(null, 'null', location.href);
-    })
+    });
+
+    Swal.fire({title:'Please wait...',allowOutsideClick: false,
+    allowEscapeKey: false});
+    Swal.showLoading(null);
 
     this.adminAPIservice.getDetails().subscribe((data) => {
+      Swal.close();
       this.source = data;
       this.source.forEach((claim: any) => {
         claim.claimsDetails.forEach((element: any) => {
