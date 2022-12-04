@@ -24,8 +24,10 @@ export class LoginComponent implements OnInit {
   }
 
   loginCheck() {
-    Swal.fire({title:'Please wait...',allowOutsideClick: false,
-    allowEscapeKey: false});
+    Swal.fire({
+      title: 'Please wait...', allowOutsideClick: false,
+      allowEscapeKey: false
+    });
     Swal.showLoading(null);
     this.customerService.login(this.login).subscribe(response => {
       if (response.success == true) {

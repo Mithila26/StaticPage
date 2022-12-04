@@ -56,8 +56,10 @@ export class PopUp1Component implements OnInit {
       history.pushState(null, 'null', location.href);
     });
 
-    Swal.fire({title:'Please wait...',allowOutsideClick: false,
-    allowEscapeKey: false});
+    Swal.fire({
+      title: 'Please wait...', allowOutsideClick: false,
+      allowEscapeKey: false
+    });
     Swal.showLoading(null);
 
     this.adminAPIservice.getDetails().subscribe((data) => {

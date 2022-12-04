@@ -32,7 +32,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
-import { MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { UserViewComponent } from './Components/user-view/user-view.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';

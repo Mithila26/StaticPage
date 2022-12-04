@@ -68,13 +68,15 @@ export class UserViewComponent implements OnInit {
   }
 
   readEmployee() {
-    Swal.fire({title:'Please wait...',allowOutsideClick: false,
-    allowEscapeKey: false});
+    Swal.fire({
+      title: 'Please wait...', allowOutsideClick: false,
+      allowEscapeKey: false
+    });
     Swal.showLoading(null);
 
     this.adminAPIservice.getUserDetails().subscribe((data: any) => {
       Swal.close();
-      
+
       this.source = data;
       this.source.forEach((claim: any) => {
         localStorage.setItem('user', claim.userName);
