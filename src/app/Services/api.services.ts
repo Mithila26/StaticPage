@@ -35,14 +35,18 @@ export class ApiService {
     const {routeConfig}= route ;
     const {path}= routeConfig as Route;
     let role= localStorage.getItem('role');
-    if (path?.includes("userView") && role === "User") {
-      
+
+    if (path?.includes("userView") && role === "User") { 
       return true;
     } 
-    if (path?.includes("claims") && role === "User") {
-      
+
+    if (path?.includes("claims") && role === "User") {    
       return true;
     } 
+
+    if (path?.includes("premium") && role === "User") {    
+      return true;
+    }
     
     if (path?.includes("adminView") && role === "Admin") {
       return true;

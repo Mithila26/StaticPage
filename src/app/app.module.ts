@@ -42,6 +42,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PopUpComponent } from './Components/pop-up/pop-up.component';
 import { PopUp1Component } from './Components/PopUp1/pop-up1.component';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { MoreInfoComponent } from './Components/more-info/more-info.component';
+import { PremiumComponent } from './Components/premium/premium.component';
 
 
 @NgModule({
@@ -60,7 +62,9 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     ForgotPasswordComponent,
     UserViewComponent,
     PopUpComponent,
-    PopUp1Component
+    PopUp1Component,
+    MoreInfoComponent,
+    PremiumComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +96,7 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     MatMenuModule,
     NgxWebstorageModule.forRoot()
   ],
-  providers: [PopUp1Component,
+  providers: [PopUp1Component, UserViewComponent,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

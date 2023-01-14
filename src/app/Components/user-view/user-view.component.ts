@@ -1,11 +1,14 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { ApiService } from 'src/app/Services/api.services';
 import Swal from 'sweetalert2';
+import { MoreInfoComponent } from '../more-info/more-info.component';
+import { PremiumComponent } from '../premium/premium.component';
 
 export interface UserData {
   ClaimNum: string;
@@ -36,13 +39,14 @@ export class UserViewComponent implements OnInit {
   claimData: any = [];
   user!: any;
   router: any;
+  premium: any;
 
-  constructor(private adminAPIservice: ApiService, private route: Router, private local: LocationStrategy) {
+  constructor(private adminAPIservice: ApiService, private Dialogref: MatDialog, private route: Router, private local: LocationStrategy) {
   }
 
   ngOnInit() {
-    history.pushState(null, 'null', location.href); //get current state in stack 
-    this.local.onPopState(() => { //set current page as current state to diasble back/ forward
+    history.pushState(null, 'null', location.href);
+    this.local.onPopState(() => {
       history.pushState(null, 'null', location.href);
     });
 
@@ -64,8 +68,27 @@ export class UserViewComponent implements OnInit {
     })
   }
 
+  addPremium() {
+    this.Dialogref.open(PremiumComponent, { width: '250px', closeOnNavigation: true });
+  }
+
   submitClaim() {
-    this.route.navigate(['claims']);
+    if (this.premium === 0 || this.premium === null) {
+      Swal.fire({
+        text: 'Please add Premium',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.route.navigate(['userView']);
+        }
+      })
+    } else {
+      this.route.navigate(['claims']);
+    }
   }
 
   readEmployee() {
@@ -81,6 +104,7 @@ export class UserViewComponent implements OnInit {
       this.source = data;
       this.source.forEach((claim: any) => {
         localStorage.setItem('user', claim.userName);
+        this.premium = claim.totalPremium;
         claim.claimsDetails.forEach((element: any) => {
           this.claimData.push(element);
         });
@@ -116,8 +140,15 @@ export class UserViewComponent implements OnInit {
     }
   }
 
-  
-
-
+  infoDialog(treatment: any, claimAmt: any, claimStatus: any) {
+    let claimInfo = {
+      treatment: treatment,
+      claimAmt: claimAmt,
+      claimStatus: claimStatus
+    }
+    this.Dialogref.open(MoreInfoComponent, {
+      data: claimInfo
+    })
+  }
 
 }

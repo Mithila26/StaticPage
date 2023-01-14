@@ -24,4 +24,8 @@ export class CustomerService {
     return this.http.put(this.url + '/resetPassword', details);
   }
 
+  addPremium(details: any): Observable<any> {
+    return this.http.put(this.url + '/updatePremium', details);
+  }
+
 }

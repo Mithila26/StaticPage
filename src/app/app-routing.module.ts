@@ -12,6 +12,7 @@ import { ApiService } from 'src/app/Services/api.services';
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
 import { UserViewComponent } from './Components/user-view/user-view.component';
 import { PopUp1Component } from './Components/PopUp1/pop-up1.component';
+import { PremiumComponent } from './Components/premium/premium.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'forgotPassword', component: ForgotPasswordComponent },
   { path: 'userView', component: UserViewComponent, canActivate: [ApiService] },
   { path: 'adminView', component: PopUp1Component, canActivate: [ApiService] },
+  { path: 'premium', component: PremiumComponent, canActivate: [ApiService]},
   { path: '**', redirectTo: '' },
 ];
 

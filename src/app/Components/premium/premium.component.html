@@ -1,0 +1,22 @@
+<h5>Add Premium<mat-icon>account_balance</mat-icon>
+</h5>
+<form [formGroup]="premiumData" (ngSubmit)="Submit()">
+    <mat-form-field>
+        <input matInput placeholder="Premium Amount" type="number" formControlName="premiumAmt" required min="1">
+        <mat-error *ngIf="premiumData.hasError('required','premiumAmt') && premiumData.get('premiumAmt')?.dirty">
+            Please enter premium amount
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Top-up" formControlName="topUp" required min="0">
+        <mat-error *ngIf="premiumData.hasError('required','topUp') && premiumData.get('topUp')?.dirty">
+            Please enter top-up amount
+        </mat-error>
+    </mat-form-field>
+    <mat-card-actions>
+        <button mat-raised-button class="btn btn-success" [disabled]="premiumData.invalid" type="submit"
+            mat-dialog-close>
+            <mat-icon>verified_user</mat-icon> Submit
+        </button>
+    </mat-card-actions>
+</form>

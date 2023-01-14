@@ -22,7 +22,8 @@ export class RegisterUserComponent implements OnInit {
     spouseName: new FormControl('', [Validators.pattern('[a-zA-Z ]+[a-zA-Z]+')]), spouseAge: new FormControl('',),
     dependents: new FormArray([]),
     claimsDetails: new FormArray([]),
-    role: new FormControl('user')
+    role: new FormControl('user'),
+    totalPremium: new FormControl(0)
   })
 
   constructor(private fb: FormBuilder, private router: Router, private customerService: CustomerService) { }
