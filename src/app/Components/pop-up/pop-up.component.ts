@@ -23,7 +23,7 @@ export class PopUpComponent implements OnInit {
     statusName: ['', [Validators.required]]
   })
 
-  ngOnInit() { }
+  ngOnInit() {} 
 
   onChange(newValue: any) {
     this.selStatus = newValue.name;

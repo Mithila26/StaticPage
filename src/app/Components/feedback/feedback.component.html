@@ -62,9 +62,9 @@
                                 <label for="rates" class="" required>Do you think our health insurance rates are
                                     reasonable?</label>
                                 <div>
-                                    <input type="radio" ng-model="myVar" name="test" value="Yes" id="radio-a">Not Sure
-                                    <input type="radio" ng-model="myVar" name="test" value="No" id="radio-b">No
-                                    <input type="radio" ng-model="myVar" name="test" value="Not Sure" id="radio-c">Yes
+                                    <input type="radio" ng-model="myVar" name="test" value="Yes" id="radio-a" formControlName="myVar">Not Sure
+                                    <input type="radio" ng-model="myVar" name="test" value="No" id="radio-b" formControlName="myVar">No
+                                    <input type="radio" ng-model="myVar" name="test" value="Not Sure" id="radio-c" formControlName="myVar">Yes
                                 </div>
                             </div>
                         </div>
@@ -76,9 +76,9 @@
                                 <label for="rates" class="">How satisfied are you with the outcome of your
                                     claims?</label>
                                 <div>
-                                    <input type="radio" ng-model="myVari" name="feedback" value="1">🙁
-                                    <input type="radio" ng-model="myVari" name="feedback" value="2">😁
-                                    <input type="radio" ng-model="myVari" name="feedback" value="3">😍
+                                    <input type="radio" ng-model="myVari" name="feedback" value="1" formControlName="myVari">🙁
+                                    <input type="radio" ng-model="myVari" name="feedback" value="2" formControlName="myVari">😁
+                                    <input type="radio" ng-model="myVari" name="feedback" value="3" formControlName="myVari">😍
                                 </div>
                             </div>
                         </div>
@@ -90,8 +90,8 @@
                                 <label for="rates" class="">Customer service representatives are knowledgeable and
                                     helpful</label>
                                 <div>
-                                    <input type="radio" ng-model="myVaria" name="val" value="1">No
-                                    <input type="radio" ng-model="myVaria" name="val" value="2">Yes
+                                    <input type="radio" ng-model="myVaria" name="val" value="1" formControlName="myVaria">No
+                                    <input type="radio" ng-model="myVaria" name="val" value="2" formControlName="myVaria">Yes
                                 </div>
                             </div>
                         </div>

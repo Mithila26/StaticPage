@@ -18,6 +18,9 @@ export class FeedbackComponent implements OnInit {
     title: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
+    myVar: new FormControl('', Validators.required),
+    myVari: new FormControl('', Validators.required),
+    myVaria: new FormControl('', Validators.required),
     feedback: new FormControl(),
   });
 

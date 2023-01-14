@@ -12,6 +12,7 @@
             <mat-icon aria-hidden="false">add_to_queue</mat-icon>
             <span class="example-spacer">Claim</span>
           </mat-option>
+
           <mat-option (click)="logout()">
             <mat-icon aria-hidden="false">logout</mat-icon>
             <span class="example-spacer">Logout</span>
@@ -37,6 +38,11 @@
 
     <ng-container matColumnDef="claimStatus">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> claimStatus </th>
+      <td mat-cell *matCellDef="let row"> {{row.claimStatus}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="moreInfo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> More Info </th>
       <td mat-cell *matCellDef="let row"> {{row.claimStatus}} </td>
     </ng-container>
 

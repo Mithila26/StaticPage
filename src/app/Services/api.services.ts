@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, RouterStateSnapshot, ActivatedRouteSnapshot, RouteConfigLoadEnd, Route } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ApiService {
   url = 'http://localhost:3004/admin';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }  
 
   registerClaim(claimObj: any): Observable<any> {
     let url = "http://localhost:3004/claims/registerClaim";
@@ -31,13 +32,26 @@ export class ApiService {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (localStorage.length > 0) {
+    const {routeConfig}= route ;
+    const {path}= routeConfig as Route;
+    let role= localStorage.getItem('role');
+    if (path?.includes("userView") && role === "User") {
+      
+      return true;
+    } 
+    if (path?.includes("claims") && role === "User") {
+      
+      return true;
+    } 
+    
+    if (path?.includes("adminView") && role === "Admin") {
       return true;
     } else {
-      alert('Please log in')
-      this.router.navigate(['']);
+      alert('Please log in');
+      localStorage.clear();
+      this.router.navigate(['login']);
       return false;
     }
+    
   }
-
 }
