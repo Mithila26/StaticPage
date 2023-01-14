@@ -25,18 +25,34 @@ export class ClaimsComponent implements OnInit {
 
   claimsDetails: any = new FormArray([])
   ID = Math.round(Math.random() * 900000).toString();
-
-  constructor(private router: Router, private _formBuilder: FormBuilder, private api: ApiService) { }
+  source: any = [];
+  dependantsData: any = [];
+  phone:any;
+  email:any;
+  
+  constructor(private router: Router, private _formBuilder: FormBuilder, private api: ApiService,private adminAPIservice: ApiService) { }
 
   ngOnInit() {
+    this.dependantsData.push(this.local);
 
+    this.adminAPIservice.getUserDetails().subscribe((data: any) => {
+      this.source = data;  
+      this.source.forEach((depend: any) => {
+        this.phone=depend.contact;
+        this.email=depend.email; }) 
+         this.source.forEach((depend: any) => {
+          depend.dependents.forEach((element: any) => {
+          this.dependantsData.push(element.name);
+        });}) 
+    })   
+    
     this.firstFormGroup = this._formBuilder.group({
-      Patientname: ['', [Validators.required, Validators.pattern('[a-zA-Z ]+[a-zA-Z]+')]],
+      Patientname: ['', [Validators.required]],
       ClaimNum: [{ value: this.ID, disabled: true }, [Validators.required, Validators.pattern('[0-9]*')]],
       AgencyNum: ['', [Validators.required, Validators.pattern('[0-9]*')]],
       PatientID: ['', [Validators.required]],
-      Patientcontact: ['', [Validators.required, Validators.pattern('[0-9]*')]],
-      Patientemail: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
+      Patientcontact: [{ value: this.phone, disabled: false }, [Validators.required, Validators.pattern('[0-9]*')]],
+      Patientemail: [{ value: this.email, disabled: false }, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
     });
 
     this.secondFormGroup = this._formBuilder.group({
@@ -48,13 +64,13 @@ export class ClaimsComponent implements OnInit {
       Eligible: ['', [Validators.required, Validators.pattern('[0-9]*')]]
     });
 
-    this.thirdFormGroup = this._formBuilder.group({
+    this.thirdFormGroup = this._formBuilder.group({    
       ClaimAmt: ['', [Validators.required, Validators.pattern('[0-9]*')]],
       Coverage: ['', [Validators.required, Validators.pattern('[0-9]*')]],
       Premium: ['', [Validators.required, Validators.pattern('[0-9]*')]],
       StatDate: ['', Validators.required],
-      DueAmt: ['', [Validators.required, Validators.pattern('[0-9]*')]],
-      Balance: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+      //Balance: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+      Balance: [{value:'', disabled: true }],
       DueDate: ['', Validators.required],
       Payment: ['', [Validators.required, Validators.pattern('[0-9]*')]]
     });
@@ -81,7 +97,7 @@ export class ClaimsComponent implements OnInit {
       AgencyNum: this.firstFormGroup.value.AgencyNum,
       PatientID: this.firstFormGroup.value.PatientID,
       Patientname: this.firstFormGroup.value.Patientname,
-      Patientcontact: this.firstFormGroup.value.Patientcontact,
+      Patientcontact: this.firstFormGroup.getRawValue().Patientcontact,
       StartDate: this.secondFormGroup.value.StartDate,
       EndDate: this.secondFormGroup.value.EndDate,
       Treatment: this.secondFormGroup.value.Treatment,
@@ -92,11 +108,10 @@ export class ClaimsComponent implements OnInit {
       Coverage: this.thirdFormGroup.value.Coverage,
       Premium: this.thirdFormGroup.value.Premium,
       StatDate: this.thirdFormGroup.value.StatDate,
-      DueAmt: this.thirdFormGroup.value.DueAmt,
-      Balance: this.thirdFormGroup.value.Balance,
+      Balance: this.thirdFormGroup.value.Coverage-this.thirdFormGroup.value.ClaimAmt,
       DueDate: this.thirdFormGroup.value.DueDate,
       Payment: this.thirdFormGroup.value.Payment,
-      Patientemail: this.firstFormGroup.value.Patientemail,
+      Patientemail: this.firstFormGroup.getRawValue().Patientemail,
       claimStatus: "Requested"
     };
 

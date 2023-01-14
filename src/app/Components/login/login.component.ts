@@ -1,3 +1,4 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -14,9 +15,13 @@ export class LoginComponent implements OnInit {
 
   login = { email: '', password: '' };
 
-  constructor(private router: Router, private customerService: CustomerService, private dialog: MatDialog) { }
+  constructor(private router: Router, private customerService: CustomerService, private dialog: MatDialog,  private local: LocationStrategy) { }
 
   ngOnInit(): void {
+    history.pushState(null, 'null', location.href);
+    this.local.onPopState(() => {
+      history.pushState(null, 'null', location.href);
+    });
   }
 
   forgotPassword() {
@@ -36,7 +41,9 @@ export class LoginComponent implements OnInit {
 
         if (response.data.role == 'user') {
           this.router.navigate(['userView']);
+          localStorage.setItem('role', 'User'); //
         } else if (response.data.role == 'admin') {
+          localStorage.setItem('role', 'Admin'); //   
           this.router.navigate(['adminView']);
         } else {
           this.router.navigate(['home']);

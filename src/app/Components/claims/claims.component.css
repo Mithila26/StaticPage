@@ -47,3 +47,9 @@ form {
 .mat-icon-button {
   justify-self: end;
 }
+
+.mat-label {
+  font-weight: bold;
+  color: rgb(10, 10, 10)
+}
+

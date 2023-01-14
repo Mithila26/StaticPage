@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { ApiService } from 'src/app/Services/api.services';
 import Swal from 'sweetalert2';
 
@@ -24,7 +24,7 @@ export class UserViewComponent implements OnInit {
 
   admins: any = [];
 
-  public displayedColumns = ['ClaimNum', 'Patientname', 'claimStatus'];
+  public displayedColumns = ['ClaimNum', 'Patientname', 'claimStatus', 'moreInfo'];
 
   dataSource!: MatTableDataSource<UserData>;
 
@@ -35,13 +35,14 @@ export class UserViewComponent implements OnInit {
   source: any = [];
   claimData: any = [];
   user!: any;
+  router: any;
 
   constructor(private adminAPIservice: ApiService, private route: Router, private local: LocationStrategy) {
   }
 
   ngOnInit() {
-    history.pushState(null, 'null', location.href);
-    this.local.onPopState(() => {
+    history.pushState(null, 'null', location.href); //get current state in stack 
+    this.local.onPopState(() => { //set current page as current state to diasble back/ forward
       history.pushState(null, 'null', location.href);
     });
 
@@ -114,5 +115,9 @@ export class UserViewComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  
+
+
 
 }
