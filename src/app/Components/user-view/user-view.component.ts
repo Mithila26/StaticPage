@@ -75,7 +75,7 @@ export class UserViewComponent implements OnInit {
   }
 
   submitClaim() {
-    if (this.premium === 0 || this.premium === null) {
+    if (this.premium === 0 || this.premium == null || this.premium == '') {
       Swal.fire({
         text: 'Please add Premium',
         icon: 'warning',
