@@ -38,8 +38,8 @@ export class ClaimsComponent implements OnInit {
     this.adminAPIservice.getUserDetails().subscribe((data: any) => {
       this.source = data;  
       this.source.forEach((depend: any) => {
-        this.phone=depend.contact;
-        this.email=depend.email; }) 
+        this.phone=(depend.contact);
+        this.email=depend.email;  }) 
          this.source.forEach((depend: any) => {
           depend.dependents.forEach((element: any) => {
           this.dependantsData.push(element.name);
@@ -51,8 +51,8 @@ export class ClaimsComponent implements OnInit {
       ClaimNum: [{ value: this.ID, disabled: true }, [Validators.required, Validators.pattern('[0-9]*')]],
       AgencyNum: ['', [Validators.required, Validators.pattern('[0-9]*')]],
       PatientID: ['', [Validators.required]],
-      Patientcontact: [{ value: this.phone, disabled: false }, [Validators.required, Validators.pattern('[0-9]*')]],
-      Patientemail: [{ value: this.email, disabled: false }, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
+      Patientcontact: [{ value: this.phone, disabled: true }, [Validators.required, Validators.pattern('[0-9]*')]],
+      Patientemail: [{ value: this.email, disabled: true }, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
     });
 
     this.secondFormGroup = this._formBuilder.group({
@@ -97,7 +97,7 @@ export class ClaimsComponent implements OnInit {
       AgencyNum: this.firstFormGroup.value.AgencyNum,
       PatientID: this.firstFormGroup.value.PatientID,
       Patientname: this.firstFormGroup.value.Patientname,
-      Patientcontact: this.firstFormGroup.getRawValue().Patientcontact,
+      Patientcontact: this.phone,
       StartDate: this.secondFormGroup.value.StartDate,
       EndDate: this.secondFormGroup.value.EndDate,
       Treatment: this.secondFormGroup.value.Treatment,
@@ -111,7 +111,7 @@ export class ClaimsComponent implements OnInit {
       Balance: this.thirdFormGroup.value.Coverage-this.thirdFormGroup.value.ClaimAmt,
       DueDate: this.thirdFormGroup.value.DueDate,
       Payment: this.thirdFormGroup.value.Payment,
-      Patientemail: this.firstFormGroup.getRawValue().Patientemail,
+      Patientemail: this.email,
       claimStatus: "Requested"
     };
 
