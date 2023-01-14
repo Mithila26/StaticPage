@@ -24,8 +24,8 @@ const routes: Routes = [
   { path: 'signUp', component: RegisterUserComponent },
   { path: 'claims', component: ClaimsComponent, canActivate: [ApiService] },
   { path: 'forgotPassword', component: ForgotPasswordComponent },
-  { path: 'userView', component: UserViewComponent },
-  { path: 'adminView', component: PopUp1Component },
+  { path: 'userView', component: UserViewComponent, canActivate: [ApiService] },
+  { path: 'adminView', component: PopUp1Component, canActivate: [ApiService] },
   { path: '**', redirectTo: '' },
 ];
 
