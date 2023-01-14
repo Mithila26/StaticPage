@@ -47,7 +47,7 @@
     <ng-container matColumnDef="moreInfo">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> More Info </th>
       <td mat-cell *matCellDef="let row ">
-        <button mat-icon-button color="primary" (click)="infoDialog(row.Treatment,row.ClaimAmt,row.claimStatus)" title="moreInfo">
+        <button mat-icon-button color="primary" (click)="infoDialog(row.Treatment,row.ClaimAmt)" title="moreInfo">
           <mat-icon>contact_emergency</mat-icon>
         </button>
       </td>

@@ -40,6 +40,8 @@ export class UserViewComponent implements OnInit {
   user!: any;
   router: any;
   premium: any;
+  balance: any;
+  coverage: any;
 
   constructor(private adminAPIservice: ApiService, private Dialogref: MatDialog, private route: Router, private local: LocationStrategy) {
   }
@@ -49,7 +51,7 @@ export class UserViewComponent implements OnInit {
     this.local.onPopState(() => {
       history.pushState(null, 'null', location.href);
     });
-
+    
     this.readEmployee();
   }
 
@@ -105,6 +107,8 @@ export class UserViewComponent implements OnInit {
       this.source.forEach((claim: any) => {
         localStorage.setItem('user', claim.userName);
         this.premium = claim.totalPremium;
+        this.balance = claim.totalBalance;
+        this.coverage = claim.totalCoverage;
         claim.claimsDetails.forEach((element: any) => {
           this.claimData.push(element);
         });
@@ -140,11 +144,13 @@ export class UserViewComponent implements OnInit {
     }
   }
 
-  infoDialog(treatment: any, claimAmt: any, claimStatus: any) {
+  infoDialog(treatment: any, claimAmt: any) {
     let claimInfo = {
       treatment: treatment,
       claimAmt: claimAmt,
-      claimStatus: claimStatus
+      premium : this.premium,
+      balance: this.balance,
+      coverage: this.coverage
     }
     this.Dialogref.open(MoreInfoComponent, {
       data: claimInfo

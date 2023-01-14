@@ -10,14 +10,18 @@ export class MoreInfoComponent implements OnInit {
 
   treatment!: string;
   claimAmt!: string;
-  claimStatus!: string;
+  coverage!: string;
+  balance!: string;
+  premium!: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) private moreData: any) { }
 
   ngOnInit(): void {
     this.treatment = this.moreData.treatment;
     this.claimAmt = this.moreData.claimAmt;
-    this.claimStatus = this.moreData.claimStatus;
+    this.coverage = this.moreData.coverage;
+    this.balance = this.moreData.balance;
+    this.premium = this.moreData.premium;
   }
 
 }

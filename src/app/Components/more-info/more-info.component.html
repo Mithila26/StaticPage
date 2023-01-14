@@ -1,5 +1,4 @@
 <div class="main-body">
-
     <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page" style="font-size: 25px;">Claim Details</li>
@@ -7,7 +6,7 @@
     </nav>
 
     <div>
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card mb-0">
                 <div class="card-body">
                     <div class="row">
@@ -21,24 +20,41 @@
                     <hr>
                     <div class="row">
                         <div class="col-mb-2">
-                            <h6 class="mb-0">Claim Amount</h6>
+                            <h6 class="mb-0">Premium</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{claimAmt}}
+                            {{premium | currency: 'INR'}}
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-mb-2">
-                            <h6 class="mb-0">Claim Status</h6>
+                            <h6 class="mb-0">Claim Amount</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{claimStatus}}
+                            {{claimAmt | currency: 'INR'}}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-mb-2">
+                            <h6 class="mb-0">Coverage</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{coverage | currency: 'INR'}}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-mb-2">
+                            <h6 class="mb-0">Balance</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{balance | currency: 'INR'}}
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

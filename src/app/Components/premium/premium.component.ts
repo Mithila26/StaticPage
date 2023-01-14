@@ -38,6 +38,7 @@ export class PremiumComponent implements OnInit {
           'Claims is enabled now!',
           'success'
         )
+        window.location.reload();
         this.router.navigate(['userView']);
       }
     }, err => {
