@@ -68,6 +68,12 @@
       <td mat-cell *matCellDef="let row"> {{row.Coverage}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="CurrentBalance">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
+      <td mat-cell *matCellDef="let row"> {{row.Balance}} </td>
+    </ng-container>
+    
+
     <ng-container matColumnDef="claimStatus">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> claimStatus </th>
       <td mat-cell *matCellDef="let row"> {{row.claimStatus}} </td>
@@ -76,7 +82,7 @@
     <ng-container matColumnDef="Action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let row ">
-        <button mat-icon-button color="primary" (click)="openDialog(row.ClaimNum,row.email)" title="Edit Contact">
+        <button mat-icon-button color="primary" (click)="openDialog(row.ClaimNum,row.email, row.ClaimAmt,row.Balance)" title="Edit Contact">
           <mat-icon>edit</mat-icon>
         </button>
       </td>

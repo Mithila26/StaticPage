@@ -29,6 +29,9 @@ export class ClaimsComponent implements OnInit {
   dependantsData: any = [];
   phone:any;
   email:any;
+  premium:any;
+  coverage:any;
+  balance:any;
   
   constructor(private router: Router, private _formBuilder: FormBuilder, private api: ApiService,private adminAPIservice: ApiService) { }
 
@@ -39,7 +42,10 @@ export class ClaimsComponent implements OnInit {
       this.source = data;  
       this.source.forEach((depend: any) => {
         this.phone=(depend.contact);
-        this.email=depend.email;  }) 
+        this.email=depend.email;
+      this.premium= depend.totalPremium;
+      this.coverage=depend.totalCoverage;
+      this.balance=depend.totalBalance }) 
          this.source.forEach((depend: any) => {
           depend.dependents.forEach((element: any) => {
           this.dependantsData.push(element.name);
@@ -66,10 +72,10 @@ export class ClaimsComponent implements OnInit {
 
     this.thirdFormGroup = this._formBuilder.group({    
       ClaimAmt: ['', [Validators.required, Validators.pattern('[0-9]*')]],
-      Coverage: ['', [Validators.required, Validators.pattern('[0-9]*')]],
-      Premium: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+      Coverage: [{ value: this.coverage, disabled: true }, [Validators.required, Validators.pattern('[0-9]*')]],
+      Premium: [{ value: this.premium, disabled: true }, [Validators.required, Validators.pattern('[0-9]*')]],
       StatDate: ['', Validators.required],
-      //Balance: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+      CurrentBalance: [{value:'', disabled: true }, [Validators.required, Validators.pattern('[0-9]*')]],
       Balance: [{value:'', disabled: true }],
       DueDate: ['', Validators.required],
       Payment: ['', [Validators.required, Validators.pattern('[0-9]*')]]
@@ -105,13 +111,14 @@ export class ClaimsComponent implements OnInit {
       PolAmt: this.secondFormGroup.value.PolAmt,
       Eligible: this.secondFormGroup.value.Eligible,
       ClaimAmt: this.thirdFormGroup.value.ClaimAmt,
-      Coverage: this.thirdFormGroup.value.Coverage,
+      Coverage: this.coverage,
       Premium: this.thirdFormGroup.value.Premium,
       StatDate: this.thirdFormGroup.value.StatDate,
-      Balance: this.thirdFormGroup.value.Coverage-this.thirdFormGroup.value.ClaimAmt,
+      Balance: this.balance-this.thirdFormGroup.value.ClaimAmt,
       DueDate: this.thirdFormGroup.value.DueDate,
       Payment: this.thirdFormGroup.value.Payment,
       Patientemail: this.email,
+      CurrentBalance:this.balance,
       claimStatus: "Requested"
     };
 
