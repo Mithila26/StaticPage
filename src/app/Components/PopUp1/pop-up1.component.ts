@@ -14,6 +14,8 @@ export interface UserData {
   Patientname: string;
   EndDate: string;
   claimStatus: string;
+  totalBalance:string;
+  
 }
 
 @Component({
@@ -23,7 +25,7 @@ export interface UserData {
 })
 export class PopUp1Component implements OnInit {
 
-  displayedColumns: string[] = ['ClaimNum', 'name', 'Patientname', 'EndDate', 'claimStatus', 'Treatment', 'PolDur', 'PolAmt', 'Eligible', 'ClaimAmt', 'Coverage', 'Action'];
+  displayedColumns: string[] = ['ClaimNum', 'name', 'Patientname', 'EndDate', 'claimStatus', 'Treatment', 'PolDur', 'PolAmt', 'Eligible', 'ClaimAmt', 'Coverage','CurrentBalance','Action' ];
   dataSource!: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -31,6 +33,8 @@ export class PopUp1Component implements OnInit {
 
   source: any = [];
   claimData: any = [];
+  
+  
 
   constructor(private adminAPIservice: ApiService, private Dialogref: MatDialog, private route: Router, private local: LocationStrategy) {
   }
@@ -63,15 +67,22 @@ export class PopUp1Component implements OnInit {
     Swal.showLoading(null);
 
     this.adminAPIservice.getDetails().subscribe((data) => {
+      
       Swal.close();
       this.source = data;
       this.source.forEach((claim: any) => {
+        
         claim.claimsDetails.forEach((element: any) => {
+          console.log(claim)
           element.email = claim.email;
-          this.claimData.push(element);
-        });
+          this.claimData.push(element); 
+                   
+        }); 
       })
+      
+    
       this.dataSource = new MatTableDataSource(this.claimData);
+      // console.log(this.dataSource)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }, err => {
@@ -90,6 +101,7 @@ export class PopUp1Component implements OnInit {
         })
       }
     })
+    
   }
 
   applyFilter(event: Event) {
@@ -101,10 +113,12 @@ export class PopUp1Component implements OnInit {
     }
   }
 
-  openDialog(claimId: any, email: any) {
+  openDialog(claimId: any, email: any, ClaimAmt: any, totalBalance: any) {
     let claimInfo = {
       claimId: claimId,
-      email: email
+      email: email,
+      ClaimAmt:ClaimAmt,
+      CurrentBalance:totalBalance
     }
     this.Dialogref.open(PopUpComponent, {
       data: claimInfo
