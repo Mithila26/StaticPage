@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/Services/api.services';
+import { CustomerService } from 'src/app/Services/customer.service';
 import Swal from 'sweetalert2';
 import { PopUp1Component } from '../PopUp1/pop-up1.component';
 
@@ -16,27 +17,44 @@ export class PopUpComponent implements OnInit {
   Status = [{ "name": "Verified" }, { "name": "Adjudicated" }, { "name": "Processed" }, { "name": "Settled" }, { "name": "Denied" }]
   statusName!: string;
   selStatus!: String;
+  public data: any;
+  source: any;
+  totBalance: any;
+  premium: any;
+  balance: any;
+  coverage: any;
+  amtObject: any;
 
-  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) private dialogData: any, private adminService: ApiService, private dialRef: PopUp1Component, private route: Router) { }
+  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) private dialogData: any, private adminService: ApiService, private dialRef: PopUp1Component, private route: Router, private customerService: CustomerService) { }
 
   statusForm = this.fb.group({
     statusName: ['', [Validators.required]]
   })
 
-  ngOnInit() {} 
+  ngOnInit() {  } 
 
   onChange(newValue: any) {
     this.selStatus = newValue.name;
   }
 
   onSubmit() {
-    let data = {
-      claimId: this.dialogData.claimId,
-      email: this.dialogData.email,
-      claimStatus: this.selStatus
-    }
+    
+    if(this.selStatus==='Processed'){
+      this.data = {
+        claimId: this.dialogData.claimId,
+        email: this.dialogData.email,
+        claimStatus: this.selStatus,
+        CurrentBalance:this.dialogData.CurrentBalance-this.dialogData.ClaimAmt
+      }
+    }else {
+      this.data = {
+        claimId: this.dialogData.claimId,
+        email: this.dialogData.email,
+        claimStatus: this.selStatus      
+      }
+    }    
 
-    this.adminService.updateStatus(data).subscribe((data) => {
+    this.adminService.updateStatus(this.data).subscribe((data) => {
       this.dialRef.cancelDialog();
       window.location.reload();
     }, err => {
