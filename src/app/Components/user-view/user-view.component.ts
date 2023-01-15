@@ -51,7 +51,7 @@ export class UserViewComponent implements OnInit {
     this.local.onPopState(() => {
       history.pushState(null, 'null', location.href);
     });
-    
+
     this.readEmployee();
   }
 
@@ -71,11 +71,11 @@ export class UserViewComponent implements OnInit {
   }
 
   addPremium() {
-    this.Dialogref.open(PremiumComponent, { width: '250px', closeOnNavigation: true });
+    this.Dialogref.open(PremiumComponent, { data: this.premium, width: '250px', closeOnNavigation: true });
   }
 
   submitClaim() {
-    if (this.premium === 0 || this.premium == null || this.premium == '') {
+    if (this.premium == 0 || this.premium == null || this.premium == '') {
       Swal.fire({
         text: 'Please add Premium',
         icon: 'warning',
@@ -148,7 +148,7 @@ export class UserViewComponent implements OnInit {
     let claimInfo = {
       treatment: treatment,
       claimAmt: claimAmt,
-      premium : this.premium,
+      premium: this.premium,
       balance: this.balance,
       coverage: this.coverage
     }

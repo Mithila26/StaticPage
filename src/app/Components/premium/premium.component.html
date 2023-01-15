@@ -2,7 +2,8 @@
 </h5>
 <form [formGroup]="premiumData" (ngSubmit)="Submit()">
     <mat-form-field>
-        <input matInput placeholder="Premium Amount" type="number" formControlName="premiumAmt" required min="1">
+        <input matInput placeholder="Current Premium Amount" type="number" formControlName="premiumAmt" required
+            min="1">
         <mat-error *ngIf="premiumData.hasError('required','premiumAmt') && premiumData.get('premiumAmt')?.dirty">
             Please enter premium amount
         </mat-error>
