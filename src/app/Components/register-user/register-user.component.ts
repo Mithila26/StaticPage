@@ -19,7 +19,7 @@ export class RegisterUserComponent implements OnInit {
     contact: new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]),
     address: new FormControl('', [Validators.required]), age: new FormControl('', [Validators.required, Validators.min(18)]),
     dob: new FormControl('', [Validators.required]), isMarried: new FormControl('', [Validators.required]),
-    spouseName: new FormControl('', [Validators.pattern('[a-zA-Z ]+[a-zA-Z]+')]), spouseAge: new FormControl('',),
+    spouseName: new FormControl('',), spouseAge: new FormControl('',),
     dependents: new FormArray([]),
     claimsDetails: new FormArray([]),
     role: new FormControl('user'),
@@ -76,6 +76,21 @@ export class RegisterUserComponent implements OnInit {
         })
       }
     })
+  }
+
+  OnMarriedChange() {
+    let marriedValue = this.registerForm.get('isMarried')?.value;
+    if (marriedValue === 'Yes') {
+      this.registerForm.get('spouseName')?.setValidators([Validators.required, Validators.pattern('[a-zA-Z ]+[a-zA-Z]+')]);
+      this.registerForm.get('spouseName')?.updateValueAndValidity();
+      this.registerForm.get('spouseAge')?.setValidators([Validators.required, Validators.min(18)]);
+      this.registerForm.get('spouseAge')?.updateValueAndValidity();
+    } else {
+      this.registerForm.get('spouseName')?.clearValidators();
+      this.registerForm.get('spouseName')?.updateValueAndValidity();
+      this.registerForm.get('spouseAge')?.clearValidators();
+      this.registerForm.get('spouseAge')?.updateValueAndValidity();
+    }
   }
 
 }

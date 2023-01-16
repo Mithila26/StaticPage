@@ -233,7 +233,7 @@
             <br />
             <mat-form-field class="full-width">
               <mat-label>Total Coverage amount</mat-label>
-              <input class="auto" matInput placeholder="Coverage" formControlName="Coverage" required value="{{this.coverage}}">
+              <input class="auto" matInput placeholder="Coverage" formControlName="Coverage" required value="{{this.coverage | currency : 'INR'}}">
             </mat-form-field>
             <div *ngIf="thirdFormGroup.get('Coverage')?.touched &&  thirdFormGroup.get('Coverage')?.invalid"
               class="alert alert-info">
@@ -246,8 +246,8 @@
             </div>
             <br />
             <mat-form-field class="full-width">
-              <mat-label>Enter Premium amount</mat-label>
-              <input class="auto" matInput placeholder="Premium" formControlName="Premium" required value="{{this.premium}}">
+              <mat-label>Premium amount</mat-label>
+              <input class="auto" matInput placeholder="Premium" formControlName="Premium" required value="{{this.premium | currency : 'INR'}}">
             </mat-form-field>
             <div *ngIf="thirdFormGroup.get('Premium')?.touched &&  thirdFormGroup.get('Premium')?.invalid"
               class="alert alert-info">
@@ -261,7 +261,7 @@
             <br />
           
             <mat-form-field class="full-width">
-              <mat-label>Your Balance after this Claim is processed :{{ this.balance- this.thirdFormGroup.value.ClaimAmt}}</mat-label>
+              <mat-label>Your Balance after this Claim is processed :{{ this.balance- this.thirdFormGroup.value.ClaimAmt | currency : 'INR'}}</mat-label>
               <input matInput placeholder="Balance" formControlName="Balance"  required>
             </mat-form-field>
             <div *ngIf="thirdFormGroup.get('Balance')?.touched &&  thirdFormGroup.get('Balance')?.invalid"
@@ -315,13 +315,13 @@
             <mat-list-item> <strong>Name :</strong> {{ this.firstFormGroup.value.Patientname }}</mat-list-item>
             <mat-list-item> <strong>Contact :</strong> {{ this.phone }}</mat-list-item>
             <mat-list-item> <strong>Email ID :</strong> {{ this.email }}</mat-list-item>
-            <mat-list-item> <strong>Policy Amount :</strong> {{ this.secondFormGroup.value.PolAmt }}</mat-list-item>
+            <mat-list-item> <strong>Policy Amount :</strong> {{ this.secondFormGroup.value.PolAmt | currency : 'INR' }}</mat-list-item>
             <mat-list-item> <strong>Policy Duration :</strong> {{ this.secondFormGroup.value.PolDur }}</mat-list-item>
-            <mat-list-item> <strong>Claim Amount :</strong> {{ this.thirdFormGroup.value.ClaimAmt }}</mat-list-item>
-            <mat-list-item> <strong>Total Coverage :</strong> {{ this.coverage }}</mat-list-item>
-            <mat-list-item> <strong>Current Balance:</strong> {{ this.balance}}</mat-list-item>
-            <mat-list-item> <strong>Balance After Claim is processed:</strong> {{ this.balance- this.thirdFormGroup.value.ClaimAmt}}</mat-list-item>
-            <mat-list-item> <strong>Payment in Total :</strong> {{ this.thirdFormGroup.value.Payment }}
+            <mat-list-item> <strong>Claim Amount :</strong> {{ this.thirdFormGroup.value.ClaimAmt | currency : 'INR' }}</mat-list-item>
+            <mat-list-item> <strong>Total Coverage :</strong> {{ this.coverage | currency : 'INR' }}</mat-list-item>
+            <mat-list-item> <strong>Current Balance:</strong> {{ this.balance | currency : 'INR' }}</mat-list-item>
+            <mat-list-item> <strong>Balance After Claim is processed:</strong> {{ this.balance- this.thirdFormGroup.value.ClaimAmt | currency : 'INR' }}</mat-list-item>
+            <mat-list-item> <strong>Payment in Total :</strong> {{ this.thirdFormGroup.value.Payment | currency : 'INR' }}
             </mat-list-item>
           </mat-list>
 

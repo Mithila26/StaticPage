@@ -112,13 +112,13 @@
 
                 <section class="example-section">
                     <label class="example-margin">Married: * </label>
-                    <mat-radio-group formControlName="isMarried">
+                    <mat-radio-group formControlName="isMarried" (change)="OnMarriedChange()">
                         <mat-radio-button class="example-margin" value="Yes">Yes</mat-radio-button>
                         <mat-radio-button class="example-margin" value="No">No</mat-radio-button>
                     </mat-radio-group>
                     <div *ngIf="registerForm.value.isMarried == 'Yes'">
                         <mat-form-field>
-                            <input matInput required placeholder="Spouse Name" name="spouseName" class="form-control"
+                            <input matInput placeholder="Spouse Name" name="spouseName" class="form-control"
                                 formControlName="spouseName" />
                         </mat-form-field>
                         <div *ngIf="registerForm.get('spouseName')?.touched &&  registerForm.get('spouseName')?.invalid"
@@ -131,9 +131,18 @@
                             </div>
                         </div>
                         <mat-form-field>
-                            <input matInput type="number" required class="form-control" placeholder="Age"
+                            <input matInput type="number" class="form-control" placeholder="Age"
                                 name="spouseAge" min="18" formControlName="spouseAge" />
                         </mat-form-field>
+                        <div *ngIf="registerForm.get('spouseAge')?.touched &&  registerForm.get('spouseAge')?.invalid"
+                            class="alert alert-info">
+                            <div *ngIf="registerForm.get('spouseAge')?.hasError('required')">
+                                Please enter spouse age
+                            </div>
+                            <div *ngIf="registerForm.get('spouseAge')?.hasError('min')">
+                                Age should greater or equal to 18
+                            </div>
+                        </div>
                     </div>
                 </section><br>
                 <section class="example-section">
