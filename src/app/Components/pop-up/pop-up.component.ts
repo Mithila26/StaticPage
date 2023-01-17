@@ -49,7 +49,8 @@ export class PopUpComponent implements OnInit {
       this.data = {
         claimId: this.dialogData.claimId,
         email: this.dialogData.email,
-        claimStatus: this.selStatus
+        claimStatus: this.selStatus,
+        CurrentBalance: this.dialogData.CurrentBalance
       }
     }
 
