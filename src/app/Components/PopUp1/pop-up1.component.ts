@@ -75,6 +75,7 @@ export class PopUp1Component implements OnInit {
         claim.claimsDetails.forEach((element: any) => {
           console.log(claim)
           element.email = claim.email;
+          element.Balance = claim.totalBalance;
           this.claimData.push(element); 
                    
         }); 
